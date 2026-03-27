@@ -4,7 +4,7 @@ import { ChevronDown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const HERO_IMAGE = "https://media.base44.com/images/public/user_69423ad711e0db23360e07dd/a69a62693_Screenshot_20260327_090508_Chrome.jpg";
+const HERO_IMAGE = "https://media.base44.com/images/public/69c69ce535233bb19cea339d/875ff3e12_Screenshot_20260323_064053_Chrome.jpg";
 
 export default function HeroSection() {
   return (
