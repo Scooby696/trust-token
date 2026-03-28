@@ -14,8 +14,8 @@ export default function HeroSection() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${HERO_IMAGE})` }}
       />
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+      {/* Overlay gradient — deep navy to near-black, patriotic */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/70 via-black/50 to-blue-950/90" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-20">

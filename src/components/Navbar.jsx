@@ -30,7 +30,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border/50">
+      {/* Patriotic stripe accent */}
+      <div className="h-1 w-full flex">
+        <div className="flex-1 bg-red-600" />
+        <div className="flex-1 bg-white/90" />
+        <div className="flex-1 bg-blue-700" />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}

@@ -28,16 +28,25 @@ const PILLARS = [
     icon: BookOpen,
     title: "Biblical Foundation",
     text: "Our Founding Fathers drew upon Scripture and Christian principles to establish the framework of American governance.",
+    color: "text-red-400",
+    bg: "bg-red-900/30",
+    hover: "hover:bg-red-800/40",
   },
   {
     icon: Shield,
     title: "Divine Providence",
     text: "The Declaration of Independence affirms a firm reliance on the protection of divine Providence.",
+    color: "text-blue-300",
+    bg: "bg-blue-900/30",
+    hover: "hover:bg-blue-800/40",
   },
   {
     icon: Cross,
     title: "Enduring Values",
     text: "The principles of Christianity were described as eternal and immutable — the bedrock of our great nation.",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    hover: "hover:bg-primary/20",
   },
 ];
 
@@ -72,8 +81,8 @@ export default function Home() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               className="text-center p-8 rounded-lg border border-border/30 hover:border-primary/30 transition-all group"
             >
-              <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <pillar.icon className="w-6 h-6 text-primary" />
+              <div className={`w-14 h-14 mx-auto mb-6 rounded-full ${pillar.bg} flex items-center justify-center ${pillar.hover} transition-colors`}>
+                <pillar.icon className={`w-6 h-6 ${pillar.color}`} />
               </div>
               <h3 className="font-cinzel text-lg font-semibold text-foreground mb-3">
                 {pillar.title}
