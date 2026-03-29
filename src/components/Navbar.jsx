@@ -21,6 +21,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Home", to: "/" },
     { label: "Marketplace", to: "/marketplace" },
+    { label: "100 Companies", to: "/hundred" },
     { label: "Companies", to: "/companies" },
     { label: "Our Mission", to: "/mission" },
     { label: "Apply", to: "/apply" },

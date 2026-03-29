@@ -13,6 +13,7 @@ import Quotes from './pages/Quotes';
 import Marketplace from './pages/Marketplace';
 import Companies from './pages/Companies';
 import Apply from './pages/Apply';
+import Hundred from './pages/Hundred';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -43,6 +44,7 @@ const AuthenticatedApp = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/apply" element={<Apply />} />
+        <Route path="/hundred" element={<Hundred />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

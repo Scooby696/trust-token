@@ -1,0 +1,41 @@
+{
+  "name": "CompanyReview",
+  "type": "object",
+  "properties": {
+    "company_slug": {
+      "type": "string",
+      "description": "Unique slug identifier for the company"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "reviewer_name": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number",
+      "description": "1-5 star rating"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "verified_purchase": {
+      "type": "boolean",
+      "default": false
+    },
+    "helpful_count": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "company_slug",
+    "company_name",
+    "reviewer_name",
+    "rating",
+    "body"
+  ]
+}
