@@ -132,6 +132,39 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Marketplace CTA */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-border/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="bg-card border border-border/50 rounded-xl p-6 hover:border-primary/30 transition-all group">
+              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">🛒 Shop American</p>
+              <h3 className="font-cinzel text-xl font-bold text-foreground mb-3">The American Marketplace</h3>
+              <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-5">
+                Browse KYC-verified American-made companies. Physical goods, digital services — all proudly made in the USA.
+              </p>
+              <Link to="/marketplace" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-5 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+                Browse Marketplace <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="bg-card border border-red-900/30 rounded-xl p-6 hover:border-red-700/40 transition-all group">
+              <p className="font-inter text-xs tracking-[0.25em] text-red-400 uppercase mb-2">🇺🇸 List Your Business</p>
+              <h3 className="font-cinzel text-xl font-bold text-foreground mb-3">Are You a USA Maker?</h3>
+              <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-5">
+                Apply for KYC verification and list your American-made goods or services. Join the growing directory of approved USA creators.
+              </p>
+              <Link to="/apply" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-5 py-3 border border-red-700/50 text-red-400 rounded-lg hover:bg-red-900/20 transition-colors">
+                Apply Now <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-border/30">
         <motion.div

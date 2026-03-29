@@ -1,0 +1,111 @@
+{
+  "name": "Company",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of what they make"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Clothing",
+        "Accessories",
+        "Home & Kitchen",
+        "Food & Beverage",
+        "Health & Beauty",
+        "Technology",
+        "Outdoor & Sport",
+        "Furniture",
+        "Tools & Hardware",
+        "Services & Digital",
+        "Other"
+      ],
+      "description": "Product category"
+    },
+    "website": {
+      "type": "string",
+      "description": "Company website URL"
+    },
+    "location": {
+      "type": "string",
+      "description": "City, State"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Logo image URL"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "pending",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "KYC verification status"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "physical",
+        "digital",
+        "both"
+      ],
+      "default": "physical",
+      "description": "Type of goods/services"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated tags for search"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Featured on homepage"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "self_listed",
+        "madeindex",
+        "allamericanclothing",
+        "authenticity50",
+        "other"
+      ],
+      "default": "self_listed"
+    },
+    "email": {
+      "type": "string",
+      "description": "Contact email"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Contact phone"
+    },
+    "founded_year": {
+      "type": "number",
+      "description": "Year founded"
+    },
+    "kyc_submitted": {
+      "type": "boolean",
+      "default": false
+    },
+    "ein_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "EIN/tax ID verified"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "category",
+    "website",
+    "location"
+  ]
+}

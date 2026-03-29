@@ -20,8 +20,10 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Home", to: "/" },
+    { label: "Marketplace", to: "/marketplace" },
+    { label: "Companies", to: "/companies" },
     { label: "Our Mission", to: "/mission" },
-    { label: "Founding Quotes", to: "/quotes" },
+    { label: "Apply", to: "/apply" },
     {
       label: "Stake TRUST",
       href: "https://app.streamflow.finance/staking",
