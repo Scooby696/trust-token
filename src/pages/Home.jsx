@@ -132,34 +132,129 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Marketplace CTA */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-border/30">
+      {/* MADEINUSA Marketplace Hero Ad */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-border/30">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-5xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-card border border-border/50 rounded-xl p-6 hover:border-primary/30 transition-all group">
-              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">🛒 Shop American</p>
-              <h3 className="font-cinzel text-xl font-bold text-foreground mb-3">The American Marketplace</h3>
-              <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-5">
-                Browse KYC-verified American-made companies. Physical goods, digital services — all proudly made in the USA.
+          {/* Big banner */}
+          <div className="relative rounded-2xl overflow-hidden border border-primary/30 bg-gradient-to-br from-blue-950 via-card to-red-950/40 p-8 sm:p-12 text-center mb-6">
+            {/* Stars decoration */}
+            <div className="absolute top-4 left-6 text-primary/20 font-cinzel text-4xl select-none">★ ★ ★</div>
+            <div className="absolute top-4 right-6 text-primary/20 font-cinzel text-4xl select-none">★ ★ ★</div>
+            {/* Stripe accent top */}
+            <div className="absolute top-0 left-0 right-0 h-1 flex">
+              <div className="flex-1 bg-red-600" />
+              <div className="flex-1 bg-white/80" />
+              <div className="flex-1 bg-blue-700" />
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="font-inter text-xs tracking-[0.35em] text-primary uppercase mb-3"
+            >
+              Powered by TRUST TOKEN
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-3 leading-tight"
+            >
+              MADEINUSA MARKETPLACE
+            </motion.h2>
+
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.35 }}
+              className="w-32 h-0.5 bg-primary mx-auto mb-5"
+            />
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="font-inter text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed mb-8"
+            >
+              The only marketplace exclusively dedicated to <strong className="text-white">KYC-verified American-made</strong> goods and services.
+              100+ companies. Real reviews. AI-powered shopping — all backed by the <span className="text-primary font-semibold">TRUST Token</span>.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Link
+                to="/hundred"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              >
+                🛒 Shop 100 American Companies <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/marketplace"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors"
+              >
+                Browse Full Marketplace <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.65 }}
+              className="flex items-center justify-center gap-6 sm:gap-12 mt-10 pt-8 border-t border-white/10"
+            >
+              {[
+                { value: "100+", label: "Verified Companies" },
+                { value: "🇺🇸", label: "100% American Made" },
+                { value: "KYC", label: "Verified Listings" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="font-cinzel text-xl sm:text-2xl font-bold text-primary">{stat.value}</p>
+                  <p className="font-inter text-xs text-muted-foreground mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Two smaller cards below */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-card border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all">
+              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">🇺🇸 List Your Business</p>
+              <h3 className="font-cinzel text-lg font-bold text-foreground mb-2">Are You a USA Maker?</h3>
+              <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
+                Apply for KYC verification and list your American-made goods or services.
               </p>
-              <Link to="/marketplace" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-5 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-                Browse Marketplace <ArrowRight className="w-4 h-4" />
+              <Link to="/apply" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 border border-red-700/50 text-red-400 rounded-lg hover:bg-red-900/20 transition-colors">
+                Apply Now <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-            <div className="bg-card border border-red-900/30 rounded-xl p-6 hover:border-red-700/40 transition-all group">
-              <p className="font-inter text-xs tracking-[0.25em] text-red-400 uppercase mb-2">🇺🇸 List Your Business</p>
-              <h3 className="font-cinzel text-xl font-bold text-foreground mb-3">Are You a USA Maker?</h3>
-              <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-5">
-                Apply for KYC verification and list your American-made goods or services. Join the growing directory of approved USA creators.
+            <div className="bg-card border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all">
+              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">⚡ TRUST TOKEN</p>
+              <h3 className="font-cinzel text-lg font-bold text-foreground mb-2">Power the Marketplace</h3>
+              <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
+                Stake TRUST tokens on Streamflow and back America's premier marketplace ecosystem.
               </p>
-              <Link to="/apply" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-5 py-3 border border-red-700/50 text-red-400 rounded-lg hover:bg-red-900/20 transition-colors">
-                Apply Now <ArrowRight className="w-4 h-4" />
-              </Link>
+              <a href="https://app.streamflow.finance/staking" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary/10 border border-primary/30 text-primary rounded-lg hover:bg-primary/20 transition-colors">
+                Stake TRUST <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </motion.div>
