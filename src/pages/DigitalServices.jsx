@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, ExternalLink, Star, Filter, X, Zap, Shield, TrendingUp, Globe } from "lucide-react";
+import { Search, Star, Filter, X, Zap, Shield, TrendingUp, Globe, Sparkles, ExternalLink } from "lucide-react";
 import { SPOTLIGHT_10, ALL_100_DIGITAL, DIGITAL_CATEGORIES } from "../lib/digitalServicesData";
+import ProviderCard from "../components/digital/ProviderCard";
+import AIProviderSearch from "../components/digital/AIProviderSearch";
 
 const CATEGORY_COLORS = {
   "Exchange": "bg-blue-900/40 text-blue-300",
@@ -28,7 +30,6 @@ function SpotlightCard({ company, index }) {
       transition={{ delay: index * 0.07 }}
       className="relative bg-gradient-to-br from-card via-card to-primary/5 border border-primary/30 rounded-xl p-6 hover:border-primary/60 transition-all group flex flex-col"
     >
-      {/* Rank badge */}
       <div className="absolute -top-3 -left-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-cinzel font-bold text-xs shadow-lg">
         #{company.rank}
       </div>
@@ -50,9 +51,7 @@ function SpotlightCard({ company, index }) {
         <span className="font-inter text-xs text-primary font-semibold">{company.highlight}</span>
       </div>
 
-      <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-        {company.desc}
-      </p>
+      <p className="font-inter text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{company.desc}</p>
 
       <div className="flex flex-wrap gap-1.5 mb-4">
         {company.tags.map((tag) => (
@@ -62,51 +61,9 @@ function SpotlightCard({ company, index }) {
         ))}
       </div>
 
-      <a
-        href={company.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1.5 py-2.5 bg-primary text-primary-foreground rounded-lg text-xs font-cinzel tracking-wider hover:bg-primary/90 transition-colors"
-      >
+      <a href={company.url} target="_blank" rel="noopener noreferrer"
+        className="flex items-center justify-center gap-1.5 py-2.5 bg-primary text-primary-foreground rounded-lg text-xs font-cinzel tracking-wider hover:bg-primary/90 transition-colors">
         Visit Website <ExternalLink className="w-3 h-3" />
-      </a>
-    </motion.div>
-  );
-}
-
-function DirectoryCard({ company, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: (index % 9) * 0.04 }}
-      className="bg-card border border-border/50 rounded-xl p-4 hover:border-primary/30 transition-all group flex flex-col"
-    >
-      <div className="flex items-start justify-between mb-2">
-        <span className={`px-2 py-0.5 rounded-full text-xs font-inter ${CATEGORY_COLORS[company.category] || "bg-muted text-muted-foreground"}`}>
-          {company.category}
-        </span>
-        {company.founded && (
-          <span className="font-inter text-xs text-muted-foreground/60">Est. {company.founded}</span>
-        )}
-      </div>
-
-      <h3 className="font-cinzel font-bold text-foreground text-sm group-hover:text-primary transition-colors mb-1 leading-snug">
-        {company.name}
-      </h3>
-      <p className="font-inter text-xs text-muted-foreground mb-2">{company.location}</p>
-      <p className="font-inter text-xs text-muted-foreground/80 leading-relaxed mb-3 flex-1 line-clamp-3">
-        {company.desc}
-      </p>
-
-      <a
-        href={company.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1.5 py-2 bg-primary/10 border border-primary/20 text-primary rounded-lg text-xs font-inter hover:bg-primary/20 transition-colors mt-auto"
-      >
-        Visit <ExternalLink className="w-3 h-3" />
       </a>
     </motion.div>
   );
@@ -116,6 +73,7 @@ export default function DigitalServices() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [activeTab, setActiveTab] = useState("directory");
+  const [showAI, setShowAI] = useState(false);
 
   const filtered = ALL_100_DIGITAL.filter((c) => {
     const matchCat = category === "All" || c.category === category;
@@ -127,6 +85,11 @@ export default function DigitalServices() {
       c.category.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
+
+  const TABS = [
+    { id: "spotlight", label: "Top 10 Spotlight", icon: Star },
+    { id: "directory", label: "Full Directory", icon: Globe },
+  ];
 
   return (
     <div className="pt-20 sm:pt-24 min-h-screen">
@@ -146,26 +109,23 @@ export default function DigitalServices() {
               <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">MADEINUSA DIGITAL</p>
               <Globe className="w-6 h-6 text-primary" />
             </div>
-
             <h1 className="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 leading-tight">
               DIGITAL SERVICES<br />DIRECTORY
             </h1>
             <div className="w-32 h-0.5 bg-primary mx-auto mb-4" />
-
             <p className="font-cinzel text-lg sm:text-xl text-primary tracking-[0.12em] font-semibold mb-6">
               100 US-Based Cryptocurrency & Blockchain Companies
             </p>
-
             <p className="font-inter text-sm sm:text-base text-white/60 max-w-2xl mx-auto leading-relaxed mb-8">
-              America leads the world in blockchain innovation. From exchanges to DeFi protocols, from Web3 infrastructure to institutional custody — these are the US companies building the digital financial future.
+              America leads the world in blockchain innovation. AI-powered provider matching, community reviews, and verified US-based digital services — all in one place.
             </p>
 
             {/* Stats */}
             <div className="flex items-center justify-center gap-6 sm:gap-12 mb-8">
               {[
-                { icon: TrendingUp, value: "100+", label: "US Companies" },
-                { icon: Shield, value: "14", label: "Categories" },
-                { icon: Zap, value: "Top 10", label: "Spotlighted" },
+                { value: "100+", label: "US Companies" },
+                { value: "14", label: "Categories" },
+                { value: "AI", label: "Powered Search" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <p className="font-cinzel text-xl sm:text-2xl font-bold text-primary">{stat.value}</p>
@@ -174,28 +134,27 @@ export default function DigitalServices() {
               ))}
             </div>
 
+            {/* AI Search CTA */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+              <button onClick={() => setShowAI(true)}
+                className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-xl font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                <Sparkles className="w-5 h-5" /> AI Provider Search + Survey
+              </button>
+              <p className="font-inter text-xs text-muted-foreground">Personalized recommendations from our directory + the web</p>
+            </div>
+
             {/* Tabs */}
             <div className="flex items-center justify-center gap-2">
-              <button
-                onClick={() => setActiveTab("spotlight")}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-cinzel text-sm tracking-wider transition-all ${
-                  activeTab === "spotlight"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card border border-border text-muted-foreground hover:border-primary/50"
-                }`}
-              >
-                <Star className="w-4 h-4" /> Top 10 Spotlight
-              </button>
-              <button
-                onClick={() => setActiveTab("directory")}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-cinzel text-sm tracking-wider transition-all ${
-                  activeTab === "directory"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card border border-border text-muted-foreground hover:border-primary/50"
-                }`}
-              >
-                <Globe className="w-4 h-4" /> Full Directory
-              </button>
+              {TABS.map((tab) => (
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-cinzel text-sm tracking-wider transition-all ${
+                    activeTab === tab.id
+                      ? "bg-card border border-primary/40 text-primary"
+                      : "bg-card/50 border border-border text-muted-foreground hover:border-primary/30"
+                  }`}>
+                  <tab.icon className="w-4 h-4" /> {tab.label}
+                </button>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -213,7 +172,7 @@ export default function DigitalServices() {
               America's Elite Crypto & Blockchain Companies
             </h2>
             <p className="font-inter text-sm text-muted-foreground max-w-2xl mx-auto">
-              The most impactful, innovative, and influential US-based cryptocurrency and blockchain companies shaping the global digital economy.
+              The most impactful US-based cryptocurrency and blockchain companies shaping the global digital economy.
             </p>
           </motion.div>
 
@@ -224,11 +183,9 @@ export default function DigitalServices() {
           </div>
 
           <div className="mt-12 text-center">
-            <button
-              onClick={() => setActiveTab("directory")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-primary/30 text-primary rounded-lg font-cinzel text-sm tracking-wider hover:bg-primary/10 transition-colors"
-            >
-              <Globe className="w-4 h-4" /> View Full 100-Company Directory
+            <button onClick={() => setActiveTab("directory")}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-primary/30 text-primary rounded-lg font-cinzel text-sm tracking-wider hover:bg-primary/10 transition-colors">
+              <Globe className="w-4 h-4" /> View Full 100-Company Directory with Reviews
             </button>
           </div>
         </section>
@@ -240,22 +197,23 @@ export default function DigitalServices() {
           {/* Filter bar */}
           <div className="sticky top-[69px] z-40 bg-background/95 backdrop-blur-md border-b border-border/50 py-2 px-4 sm:px-6">
             <div className="max-w-7xl mx-auto space-y-2">
-              {/* Search */}
-              <div className="relative max-w-xl">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by company, technology, or category..."
-                  className="w-full bg-card border border-border rounded-lg pl-11 pr-10 py-2 text-sm font-inter text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                />
-                {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <X className="w-4 h-4 text-muted-foreground" />
-                  </button>
-                )}
+              <div className="flex items-center gap-2">
+                <div className="relative flex-1 max-w-xl">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input value={search} onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search by company, technology, or category..."
+                    className="w-full bg-card border border-border rounded-lg pl-11 pr-10 py-2 text-sm font-inter text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                  {search && (
+                    <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
+                      <X className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  )}
+                </div>
+                <button onClick={() => setShowAI(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-xs font-cinzel tracking-wider hover:bg-primary/90 transition-colors whitespace-nowrap">
+                  <Sparkles className="w-3.5 h-3.5" /> AI Search
+                </button>
               </div>
-              {/* Categories */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1">
                 <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
                 {DIGITAL_CATEGORIES.map((cat) => (
@@ -276,7 +234,7 @@ export default function DigitalServices() {
           <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {filtered.map((company, i) => (
-                <DirectoryCard key={company.name} company={company} index={i} />
+                <ProviderCard key={company.name} company={company} index={i} />
               ))}
             </div>
 
@@ -284,7 +242,11 @@ export default function DigitalServices() {
               <div className="text-center py-24">
                 <Globe className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                 <p className="font-cinzel text-xl text-foreground mb-2">No results found</p>
-                <p className="font-inter text-sm text-muted-foreground">Try a different search term or category.</p>
+                <p className="font-inter text-sm text-muted-foreground mb-5">Try the AI search for smarter matching.</p>
+                <button onClick={() => setShowAI(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-cinzel text-sm tracking-wider">
+                  <Sparkles className="w-4 h-4" /> Ask AI
+                </button>
               </div>
             )}
 
@@ -301,6 +263,8 @@ export default function DigitalServices() {
           </section>
         </>
       )}
+
+      {showAI && <AIProviderSearch onClose={() => setShowAI(false)} />}
     </div>
   );
 }

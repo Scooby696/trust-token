@@ -1,0 +1,44 @@
+{
+  "name": "ProviderReview",
+  "type": "object",
+  "properties": {
+    "provider_slug": {
+      "type": "string",
+      "description": "Unique slug for the provider"
+    },
+    "provider_name": {
+      "type": "string"
+    },
+    "reviewer_name": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number",
+      "description": "1-5 star rating"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "service_used": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "helpful_count": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "provider_slug",
+    "provider_name",
+    "reviewer_name",
+    "rating",
+    "body"
+  ]
+}
