@@ -23,6 +23,7 @@ export default function Navbar() {
     { label: "Marketplace", to: "/marketplace" },
     { label: "100 Companies", to: "/hundred" },
     { label: "Defense", to: "/defense" },
+    { label: "Digital", to: "/digital" },
     { label: "Companies", to: "/companies" },
     { label: "Our Mission", to: "/mission" },
     { label: "Apply", to: "/apply" },

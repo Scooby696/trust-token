@@ -33,6 +33,7 @@ export default function Footer() {
             <Link to="/marketplace" className="hover:text-primary transition-colors">Marketplace</Link>
             <Link to="/hundred" className="hover:text-primary transition-colors">100 Companies</Link>
             <Link to="/defense" className="hover:text-primary transition-colors">Defense</Link>
+            <Link to="/digital" className="hover:text-primary transition-colors">Digital</Link>
             <Link to="/companies" className="hover:text-primary transition-colors">Companies</Link>
             <Link to="/apply" className="hover:text-primary transition-colors">Apply</Link>
             <Link to="/mission" className="hover:text-primary transition-colors">Mission</Link>
