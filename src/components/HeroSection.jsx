@@ -25,7 +25,7 @@ export default function HeroSection() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="font-inter text-xs sm:text-sm tracking-[0.35em] text-primary uppercase mb-6"
         >
-          by MADEINUSA DIGITAL
+          MADE IN USA DIGITAL
         </motion.p>
 
         <motion.h1
@@ -50,7 +50,7 @@ export default function HeroSection() {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="font-cinzel text-xl sm:text-2xl md:text-3xl text-primary tracking-[0.2em] mb-8"
         >
-          TRUST TOKEN
+          MADE IN USA DIGITAL · TRUST TOKEN
         </motion.h2>
 
         <motion.p

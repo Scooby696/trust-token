@@ -46,9 +46,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <span className="font-cinzel text-primary font-bold text-lg sm:text-xl tracking-widest">
-              TRUST TOKEN
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-cinzel text-primary font-bold text-base sm:text-lg tracking-widest">
+                MADE IN USA DIGITAL
+              </span>
+              <span className="font-inter text-muted-foreground text-xs tracking-wider">powered by TRUST TOKEN</span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}

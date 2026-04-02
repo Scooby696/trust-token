@@ -43,7 +43,7 @@ export default function Marketplace() {
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
-              MADEINUSA DIGITAL
+              MADE IN USA DIGITAL · powered by TRUST TOKEN
             </p>
             <h1 className="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
               The American Marketplace

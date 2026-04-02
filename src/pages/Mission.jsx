@@ -49,17 +49,17 @@ export default function Mission() {
         <div className="relative z-10 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-14">
             <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase mb-3">
-              by MADEINUSA DIGITAL
+              powered by TRUST TOKEN
             </p>
             <h1 className="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
               MISSION STATEMENT
             </h1>
             <div className="w-32 h-0.5 bg-primary mx-auto mb-6" />
             <p className="font-cinzel text-xl sm:text-2xl text-primary tracking-wider font-semibold mb-8">
-              TRUST TOKEN
+              MADE IN USA DIGITAL
             </p>
             <p className="font-inter text-base sm:text-lg text-white/75 max-w-3xl mx-auto leading-relaxed">
-              TRUST TOKEN, powered by MADE IN USA DIGITAL, exists to rebuild trust in cryptocurrency and the broader digital economy by creating a <strong className="text-white">transparent, secure, and fully verifiable</strong> staking and rewards platform on Solana.
+              MADE IN USA DIGITAL, powered by TRUST TOKEN, exists to rebuild trust in cryptocurrency and the broader digital economy by creating a <strong className="text-white">transparent, secure, and fully verifiable</strong> staking and rewards platform on Solana.
             </p>
           </motion.div>
 

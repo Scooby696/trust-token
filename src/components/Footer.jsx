@@ -21,10 +21,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <p className="font-cinzel text-primary font-bold tracking-widest text-lg">
-              TRUST TOKEN
+              MADE IN USA DIGITAL
             </p>
             <p className="font-inter text-xs text-muted-foreground mt-1 tracking-wider">
-              by MADEINUSA DIGITAL
+              powered by TRUST TOKEN
             </p>
           </div>
 

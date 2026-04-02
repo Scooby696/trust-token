@@ -159,7 +159,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="font-inter text-xs tracking-[0.35em] text-primary uppercase mb-3"
             >
-              Powered by TRUST TOKEN
+              MADE IN USA DIGITAL · Powered by TRUST TOKEN
             </motion.p>
 
             <motion.h2
@@ -246,7 +246,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="bg-card border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all">
-              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">⚡ TRUST TOKEN</p>
+              <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">⚡ TRUST TOKEN · MADE IN USA DIGITAL</p>
               <h3 className="font-cinzel text-lg font-bold text-foreground mb-2">Power the Marketplace</h3>
               <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
                 Stake TRUST tokens on Streamflow and back America's premier marketplace ecosystem.

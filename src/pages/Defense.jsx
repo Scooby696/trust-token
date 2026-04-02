@@ -79,7 +79,7 @@ export default function Defense() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="flex items-center justify-center gap-3 mb-4">
               <Shield className="w-8 h-8 text-primary" />
-              <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">MADEINUSA DIGITAL</p>
+              <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">MADE IN USA DIGITAL · powered by TRUST TOKEN</p>
               <Shield className="w-8 h-8 text-primary" />
             </div>
 
