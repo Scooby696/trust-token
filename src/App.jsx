@@ -16,6 +16,7 @@ import Apply from './pages/Apply';
 import Hundred from './pages/Hundred';
 import Defense from './pages/Defense';
 import DigitalServices from './pages/DigitalServices';
+import ApplicationStatus from './pages/ApplicationStatus';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -49,6 +50,7 @@ const AuthenticatedApp = () => {
         <Route path="/hundred" element={<Hundred />} />
         <Route path="/defense" element={<Defense />} />
         <Route path="/digital" element={<DigitalServices />} />
+        <Route path="/status" element={<ApplicationStatus />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

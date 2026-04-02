@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Upload, ShieldCheck, AlertCircle } from "lucide-react";
+import { CheckCircle2, Upload, ShieldCheck, AlertCircle, ArrowRight, Clock } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { Link } from "react-router-dom";
 
-const STEPS = ["Business Info", "USA Verification", "Documents", "Review & Submit"];
+const STEPS = ["Business Info", "USA Verification", "Certifications & Docs", "Review & Submit"];
 
 const CATEGORIES = ["Clothing", "Accessories", "Home & Kitchen", "Food & Beverage", "Health & Beauty", "Technology", "Outdoor & Sport", "Furniture", "Tools & Hardware", "Services & Digital", "Other"];
 const STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
+const CERT_TYPES = ["FTC Made in USA", "Union Label", "USDA Certified", "ISO Certified", "State Certification", "Other"];
 
 export default function Apply() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
+  const [uploadingField, setUploadingField] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     business_name: "", owner_name: "", email: "", phone: "",
     website: "", location: "", state_of_incorporation: "",
     ein_number: "", category: "", product_description: "",
     made_in_usa_proof: "", id_document_url: "", business_license_url: "",
+    certification_url: "", certification_type: "",
     type: "physical", social_instagram: "", social_x: "", agree_terms: false,
   });
 
@@ -26,23 +30,24 @@ export default function Apply() {
   const handleFileUpload = async (e, field) => {
     const file = e.target.files[0];
     if (!file) return;
-    setUploading(true);
+    setUploadingField(field);
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     set(field, file_url);
-    setUploading(false);
+    setUploadingField(null);
   };
 
   const handleSubmit = async () => {
     setSubmitting(true);
     await base44.entities.CreatorApplication.create({ ...form, status: "submitted", kyc_submitted: true });
     setSubmitting(false);
+    setSubmittedEmail(form.email);
     setSubmitted(true);
   };
 
   if (submitted) {
     return (
       <div className="pt-20 sm:pt-24 min-h-screen flex items-center justify-center px-4">
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-lg text-center">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-lg w-full text-center">
           <div className="w-20 h-20 bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-green-400" />
           </div>
@@ -50,15 +55,21 @@ export default function Apply() {
           <p className="font-inter text-muted-foreground leading-relaxed mb-4">
             Thank you, <strong>{form.business_name}</strong>. Your KYC application is under review. Our team will verify your USA manufacturing credentials and reach out within 3–5 business days.
           </p>
-          <div className="bg-card border border-border/50 rounded-lg p-4 text-left text-sm font-inter text-muted-foreground">
+          <div className="bg-card border border-border/50 rounded-lg p-4 text-left text-sm font-inter text-muted-foreground mb-6">
             <p className="font-semibold text-foreground mb-2">What happens next?</p>
             <ol className="list-decimal list-inside space-y-1">
-              <li>Admin reviews your business documents</li>
+              <li>Admin reviews your business documents & certifications</li>
               <li>EIN and state registration verified</li>
               <li>USA manufacturing claim confirmed</li>
               <li>Your listing goes live on the Marketplace</li>
             </ol>
           </div>
+          <Link
+            to={`/status?email=${encodeURIComponent(submittedEmail)}`}
+            className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            <Clock className="w-4 h-4" /> Track Application Status
+          </Link>
         </motion.div>
       </div>
     );
@@ -76,6 +87,11 @@ export default function Apply() {
           <p className="font-inter text-muted-foreground text-sm">
             Only verified American-made businesses are approved. We confirm your EIN, state registration, and USA manufacturing.
           </p>
+          <div className="mt-4">
+            <Link to="/status" className="inline-flex items-center gap-1.5 font-inter text-xs text-primary/70 hover:text-primary transition-colors">
+              <Clock className="w-3.5 h-3.5" /> Already applied? Track your status
+            </Link>
+          </div>
         </motion.div>
 
         {/* Step Indicators */}
@@ -92,6 +108,7 @@ export default function Apply() {
         </div>
 
         <div className="bg-card border border-border/50 rounded-xl p-6 sm:p-8">
+
           {/* Step 0: Business Info */}
           {step === 0 && (
             <div className="space-y-4">
@@ -160,22 +177,47 @@ export default function Apply() {
             </div>
           )}
 
-          {/* Step 2: Documents */}
+          {/* Step 2: Certifications & Documents */}
           {step === 2 && (
             <div className="space-y-6">
-              <h3 className="font-cinzel font-semibold text-foreground text-lg mb-4">Upload Documents</h3>
+              <h3 className="font-cinzel font-semibold text-foreground text-lg mb-1">Certifications & Documents</h3>
+              <p className="font-inter text-xs text-muted-foreground mb-4">Upload your Made in USA certifications, government ID, and business license. Certifications significantly speed up approval.</p>
+
+              {/* Certification section */}
+              <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 space-y-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <ShieldCheck className="w-4 h-4 text-primary" />
+                  <p className="font-cinzel text-sm font-semibold text-foreground">Made in USA Certification <span className="text-muted-foreground font-inter font-normal text-xs">(Recommended)</span></p>
+                </div>
+                <div>
+                  <label className="block font-inter text-xs text-muted-foreground mb-1.5">Certification Type</label>
+                  <select value={form.certification_type} onChange={(e) => set("certification_type", e.target.value)} className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-sm font-inter text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <option value="">Select certification type</option>
+                    {CERT_TYPES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                <UploadField
+                  label="Upload Certification Document"
+                  hint="FTC compliance letter, union certificate, USDA cert, or equivalent"
+                  value={form.certification_url}
+                  uploading={uploadingField === "certification_url"}
+                  onChange={(e) => handleFileUpload(e, "certification_url")}
+                />
+              </div>
+
+              {/* Required documents */}
               <UploadField
                 label="Government-Issued ID (owner) *"
                 hint="Driver's license, passport, or state ID"
                 value={form.id_document_url}
-                uploading={uploading}
+                uploading={uploadingField === "id_document_url"}
                 onChange={(e) => handleFileUpload(e, "id_document_url")}
               />
               <UploadField
                 label="Business License or Articles of Incorporation"
                 hint="State business registration document"
                 value={form.business_license_url}
-                uploading={uploading}
+                uploading={uploadingField === "business_license_url"}
                 onChange={(e) => handleFileUpload(e, "business_license_url")}
               />
             </div>
@@ -190,8 +232,11 @@ export default function Apply() {
               <ReviewRow label="Email" value={form.email} />
               <ReviewRow label="Location" value={form.location} />
               <ReviewRow label="Category" value={form.category} />
+              <ReviewRow label="Type" value={form.type} />
               <ReviewRow label="EIN" value={form.ein_number} />
               <ReviewRow label="State Inc." value={form.state_of_incorporation} />
+              <ReviewRow label="Certification" value={form.certification_type || "Not provided"} />
+              <ReviewRow label="Cert. Doc" value={form.certification_url ? "✓ Uploaded" : "Not provided"} />
               <ReviewRow label="ID Doc" value={form.id_document_url ? "✓ Uploaded" : "Not provided"} />
               <ReviewRow label="License" value={form.business_license_url ? "✓ Uploaded" : "Not provided"} />
 
@@ -199,7 +244,7 @@ export default function Apply() {
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input type="checkbox" checked={form.agree_terms} onChange={(e) => set("agree_terms", e.target.checked)} className="mt-0.5" />
                   <span className="font-inter text-xs text-muted-foreground leading-relaxed">
-                    I certify that all information provided is accurate and that my products are substantially made in the United States of America. I agree to MADEINUSA DIGITAL's listing terms and understand that false claims will result in immediate removal.
+                    I certify that all information provided is accurate and that my products are substantially made in the United States of America. I agree to MADE IN USA DIGITAL's listing terms and understand that false claims will result in immediate removal.
                   </span>
                 </label>
               </div>
@@ -256,12 +301,12 @@ function UploadField({ label, hint, value, uploading, onChange }) {
       {value ? (
         <div className="flex items-center gap-2 px-3 py-2.5 bg-green-900/20 border border-green-700/30 rounded-lg">
           <CheckCircle2 className="w-4 h-4 text-green-400" />
-          <span className="font-inter text-xs text-green-300">Document uploaded</span>
+          <span className="font-inter text-xs text-green-300">Document uploaded successfully</span>
         </div>
       ) : (
         <label className="flex items-center gap-2 px-3 py-2.5 bg-background border border-dashed border-border rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
           <Upload className="w-4 h-4 text-muted-foreground" />
-          <span className="font-inter text-xs text-muted-foreground">{uploading ? "Uploading..." : "Click to upload file"}</span>
+          <span className="font-inter text-xs text-muted-foreground">{uploading ? "Uploading..." : "Click to upload file (PDF, JPG, PNG)"}</span>
           <input type="file" onChange={onChange} disabled={uploading} className="hidden" accept=".pdf,.jpg,.jpeg,.png" />
         </label>
       )}

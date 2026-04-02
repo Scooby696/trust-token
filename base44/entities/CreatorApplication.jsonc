@@ -60,6 +60,22 @@
       "type": "string",
       "description": "Business license URL"
     },
+    "certification_url": {
+      "type": "string",
+      "description": "Made in USA certification document URL (e.g. FTC compliance, union cert)"
+    },
+    "certification_type": {
+      "type": "string",
+      "enum": [
+        "FTC Made in USA",
+        "Union Label",
+        "USDA Certified",
+        "ISO Certified",
+        "State Certification",
+        "Other"
+      ],
+      "description": "Type of certification provided"
+    },
     "status": {
       "type": "string",
       "enum": [
@@ -89,6 +105,10 @@
       "type": "string"
     },
     "agree_terms": {
+      "type": "boolean",
+      "default": false
+    },
+    "kyc_submitted": {
       "type": "boolean",
       "default": false
     }
