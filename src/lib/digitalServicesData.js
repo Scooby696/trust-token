@@ -73,6 +73,18 @@ export const SPOTLIGHT_10 = [
   },
   {
     rank: 7,
+    name: "Pump.fun",
+    location: "United States",
+    founded: 2024,
+    employees: "11-50",
+    desc: "The leading token launch platform on Solana. Pump.fun enables anyone to create and launch fair-launch memecoins in seconds with a built-in bonding curve and instant liquidity — the most-used launchpad in crypto history.",
+    tags: ["DeFi", "Token Launch", "Solana", "Memecoins"],
+    url: "https://pump.fun/",
+    highlight: "⭐ SPONSORED · #1 Token Launchpad · Solana",
+    sponsored: true,
+  },
+  {
+    rank: 8,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -83,7 +95,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NASDAQ Listed · 100M+ Users",
   },
   {
-    rank: 8,
+    rank: 9,
     name: "Ripple",
     location: "San Francisco, CA",
     founded: 2012,
@@ -94,7 +106,7 @@ export const SPOTLIGHT_10 = [
     highlight: "XRP Ledger · Global Payments",
   },
   {
-    rank: 9,
+    rank: 10,
     name: "Kraken",
     location: "San Francisco, CA",
     founded: 2011,
@@ -185,6 +197,7 @@ export const SPOTLIGHT_10 = [
 
 export const ALL_100_DIGITAL = [
   // Sponsored
+  { name: "Pump.fun", category: "DeFi", location: "United States", founded: 2024, desc: "The leading token launch platform on Solana. Create and launch fair-launch memecoins in seconds with a built-in bonding curve and instant liquidity.", url: "https://pump.fun/", sponsored: true },
   { name: "Jupiter", category: "DeFi", location: "United States", founded: 2021, desc: "The #1 liquidity aggregator and swap infrastructure on Solana. Routes trades across all major DEXs for the best price, plus limit orders, DCA, and perpetuals.", url: "https://jup.ag/", sponsored: true },
   { name: "Solana", category: "Blockchain Infrastructure", location: "United States", founded: 2020, desc: "The world's highest-performance Layer 1 blockchain — 65,000 TPS, sub-second finality, and near-zero fees powering the fastest-growing DeFi and NFT ecosystem.", url: "https://solana.com/", sponsored: true },
   { name: "Streamflow", category: "DeFi", location: "United States", founded: 2021, desc: "Leading token distribution and staking infrastructure on Solana. Powers vesting, payroll, staking pools, and multi-recipient token streams for hundreds of Web3 projects.", url: "https://streamflow.finance/staking", sponsored: true },
