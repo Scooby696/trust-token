@@ -61,6 +61,18 @@ export const SPOTLIGHT_10 = [
   },
   {
     rank: 6,
+    name: "Jupiter",
+    location: "United States",
+    founded: 2021,
+    employees: "11-50",
+    desc: "The #1 liquidity aggregator and swap infrastructure on Solana. Jupiter routes trades across all major DEXs to guarantee the best price, and powers limit orders, DCA, and perpetuals for the Solana ecosystem.",
+    tags: ["DeFi", "DEX Aggregator", "Solana", "Liquidity"],
+    url: "https://jup.ag/",
+    highlight: "⭐ SPONSORED · #1 Solana DEX Aggregator",
+    sponsored: true,
+  },
+  {
+    rank: 7,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -71,7 +83,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NASDAQ Listed · 100M+ Users",
   },
   {
-    rank: 7,
+    rank: 8,
     name: "Ripple",
     location: "San Francisco, CA",
     founded: 2012,
@@ -82,7 +94,7 @@ export const SPOTLIGHT_10 = [
     highlight: "XRP Ledger · Global Payments",
   },
   {
-    rank: 8,
+    rank: 9,
     name: "Kraken",
     location: "San Francisco, CA",
     founded: 2011,
@@ -93,7 +105,7 @@ export const SPOTLIGHT_10 = [
     highlight: "Founded 2011 · Most Trusted",
   },
   {
-    rank: 9,
+    rank: 10,
     name: "Gemini",
     location: "New York, NY",
     founded: 2014,
@@ -173,6 +185,7 @@ export const SPOTLIGHT_10 = [
 
 export const ALL_100_DIGITAL = [
   // Sponsored
+  { name: "Jupiter", category: "DeFi", location: "United States", founded: 2021, desc: "The #1 liquidity aggregator and swap infrastructure on Solana. Routes trades across all major DEXs for the best price, plus limit orders, DCA, and perpetuals.", url: "https://jup.ag/", sponsored: true },
   { name: "Solana", category: "Blockchain Infrastructure", location: "United States", founded: 2020, desc: "The world's highest-performance Layer 1 blockchain — 65,000 TPS, sub-second finality, and near-zero fees powering the fastest-growing DeFi and NFT ecosystem.", url: "https://solana.com/", sponsored: true },
   { name: "Streamflow", category: "DeFi", location: "United States", founded: 2021, desc: "Leading token distribution and staking infrastructure on Solana. Powers vesting, payroll, staking pools, and multi-recipient token streams for hundreds of Web3 projects.", url: "https://streamflow.finance/staking", sponsored: true },
   { name: "Phantom", category: "Identity & Security", location: "United States", founded: 2021, desc: "The #1 crypto wallet for Solana and multi-chain. Store, buy, send, swap tokens, and collect NFTs across Solana, Ethereum, Bitcoin, Polygon, and Base.", url: "https://phantom.com/", sponsored: true },
