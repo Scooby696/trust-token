@@ -186,6 +186,13 @@ export default function DigitalServices() {
             </p>
           </motion.div>
 
+          {/* Paid promotion disclosure */}
+          <div className="mb-8 flex items-start gap-3 px-4 py-3 bg-primary/5 border border-primary/20 rounded-xl max-w-3xl mx-auto text-center justify-center">
+            <p className="font-inter text-xs text-muted-foreground leading-relaxed">
+              <span className="text-primary font-semibold">★ Sponsored Disclosure:</span> The top 10 spotlight positions are paid promotional placements. All featured companies have been reviewed and are verified trusted services. Some providers may operate or offer services from the USA. Sponsored rankings do not reflect editorial endorsement beyond verification of legitimacy.
+            </p>
+          </div>
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {SPOTLIGHT_10.map((company, i) => (
               <SpotlightCard key={company.name} company={company} index={i} />
