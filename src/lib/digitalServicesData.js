@@ -24,7 +24,43 @@ export const SPOTLIGHT_10 = [
     sponsored: true,
   },
   {
+    rank: 3,
+    name: "Solana",
+    location: "United States",
+    founded: 2020,
+    employees: "100-500",
+    desc: "The world's highest-performance Layer 1 blockchain — 65,000 TPS, sub-second finality, and near-zero fees. Solana powers the fastest-growing ecosystem in DeFi, NFTs, payments, and consumer crypto apps.",
+    tags: ["Blockchain Infrastructure", "Layer 1", "DeFi", "High Performance"],
+    url: "https://solana.com/",
+    highlight: "⭐ SPONSORED · 65,000 TPS · Sub-Second Finality",
+    sponsored: true,
+  },
+  {
     rank: 4,
+    name: "Streamflow",
+    location: "United States",
+    founded: 2021,
+    employees: "11-50",
+    desc: "The leading token distribution and staking infrastructure on Solana. Streamflow powers vesting, payroll, staking pools, and multi-recipient token streams — trusted by hundreds of Web3 projects for secure, automated on-chain payments.",
+    tags: ["DeFi", "Staking", "Token Vesting", "Payments"],
+    url: "https://streamflow.finance/staking",
+    highlight: "⭐ SPONSORED · Staking · Token Vesting",
+    sponsored: true,
+  },
+  {
+    rank: 5,
+    name: "Phantom",
+    location: "United States",
+    founded: 2021,
+    employees: "11-50",
+    desc: "The #1 crypto wallet for Solana and multi-chain. Phantom makes it safe and easy to store, buy, send, receive, swap tokens, and collect NFTs across Solana, Ethereum, Bitcoin, Polygon, and Base.",
+    tags: ["Wallet", "DeFi", "NFT", "Multi-Chain"],
+    url: "https://phantom.com/",
+    highlight: "⭐ SPONSORED · #1 Solana Wallet · Multi-Chain",
+    sponsored: true,
+  },
+  {
+    rank: 6,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -35,7 +71,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NASDAQ Listed · 100M+ Users",
   },
   {
-    rank: 5,
+    rank: 7,
     name: "Ripple",
     location: "San Francisco, CA",
     founded: 2012,
@@ -46,7 +82,7 @@ export const SPOTLIGHT_10 = [
     highlight: "XRP Ledger · Global Payments",
   },
   {
-    rank: 6,
+    rank: 8,
     name: "Kraken",
     location: "San Francisco, CA",
     founded: 2011,
@@ -57,7 +93,7 @@ export const SPOTLIGHT_10 = [
     highlight: "Founded 2011 · Most Trusted",
   },
   {
-    rank: 7,
+    rank: 9,
     name: "Gemini",
     location: "New York, NY",
     founded: 2014,
@@ -68,7 +104,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NYDFS Licensed · SOC 2 Certified",
   },
   {
-    rank: 8,
+    rank: 10,
     name: "Chainalysis",
     location: "New York, NY",
     founded: 2014,
@@ -137,6 +173,9 @@ export const SPOTLIGHT_10 = [
 
 export const ALL_100_DIGITAL = [
   // Sponsored
+  { name: "Solana", category: "Blockchain Infrastructure", location: "United States", founded: 2020, desc: "The world's highest-performance Layer 1 blockchain — 65,000 TPS, sub-second finality, and near-zero fees powering the fastest-growing DeFi and NFT ecosystem.", url: "https://solana.com/", sponsored: true },
+  { name: "Streamflow", category: "DeFi", location: "United States", founded: 2021, desc: "Leading token distribution and staking infrastructure on Solana. Powers vesting, payroll, staking pools, and multi-recipient token streams for hundreds of Web3 projects.", url: "https://streamflow.finance/staking", sponsored: true },
+  { name: "Phantom", category: "Identity & Security", location: "United States", founded: 2021, desc: "The #1 crypto wallet for Solana and multi-chain. Store, buy, send, swap tokens, and collect NFTs across Solana, Ethereum, Bitcoin, Polygon, and Base.", url: "https://phantom.com/", sponsored: true },
   { name: "Xeris", category: "Blockchain Infrastructure", location: "United States", founded: 2023, desc: "The world's first hardware-secured triple consensus blockchain (PoW + PoS + PoH) optimized for high-frequency institutional RWA settlements. Delivers unlimited liquidity and 10,000 TPS with immutable cryptographic proof.", url: "https://xerisweb.com/", sponsored: true },
   { name: "Zera Labs", category: "Identity & Security", location: "United States", founded: 2024, desc: "Pioneering the new era of digital cash with zero-knowledge privacy. Turns crypto assets into private, portable, and secure digital cash via a unified ZK pool — enabling shielded balances, offline P2P payments, and seamless DeFi hooks built on Solana.", url: "https://zeralabs.org/", sponsored: true },
   // Exchanges
