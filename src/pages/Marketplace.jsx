@@ -1,39 +1,94 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Sparkles, ArrowRight, ExternalLink, Star, Filter, X } from "lucide-react";
+import { Search, Sparkles, ArrowRight, ExternalLink, Star, X } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import CompanyCard from "../components/marketplace/CompanyCard";
 import AISearchPanel from "../components/marketplace/AISearchPanel";
+import MarketplaceFilters from "../components/marketplace/MarketplaceFilters";
 import { Link } from "react-router-dom";
 
-const CATEGORIES = ["All", "Clothing", "Accessories", "Home & Kitchen", "Food & Beverage", "Health & Beauty", "Technology", "Outdoor & Sport", "Furniture", "Tools & Hardware", "Services & Digital"];
+const DEFAULT_FILTERS = {
+  category: "All",
+  state: "All States",
+  cert: "all",
+  type: "all",
+  sort: "featured",
+};
+
+function applyFiltersAndSort(companies, search, filters) {
+  let result = companies.filter((c) => {
+    // Category
+    if (filters.category !== "All" && c.category !== filters.category) return false;
+    // Type
+    if (filters.type !== "all" && c.type !== filters.type && c.type !== "both") return false;
+    // State — match last part of "City, ST" location
+    if (filters.state !== "All States") {
+      const stateAbbr = (c.location || "").split(",").pop().trim().toUpperCase();
+      if (stateAbbr !== filters.state) return false;
+    }
+    // Certification — stored in tags or ein_verified / certification_type
+    if (filters.cert !== "all") {
+      const tags = (c.tags || "").toLowerCase();
+      const certType = (c.certification_type || "").toLowerCase();
+      if (filters.cert === "certified") {
+        if (!c.ein_verified && !certType) return false;
+      } else if (filters.cert === "none") {
+        if (c.ein_verified || certType) return false;
+      } else {
+        if (certType !== filters.cert.toLowerCase() && !tags.includes(filters.cert.toLowerCase())) return false;
+      }
+    }
+    // Text search
+    if (search) {
+      const q = search.toLowerCase();
+      if (
+        !c.name?.toLowerCase().includes(q) &&
+        !c.description?.toLowerCase().includes(q) &&
+        !c.tags?.toLowerCase().includes(q) &&
+        !c.location?.toLowerCase().includes(q)
+      ) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  switch (filters.sort) {
+    case "featured":
+      result = [...result].sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
+      break;
+    case "newest":
+      result = [...result].sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+      break;
+    case "oldest":
+      result = [...result].sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+      break;
+    case "name_az":
+      result = [...result].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      break;
+    case "name_za":
+      result = [...result].sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+      break;
+    default:
+      break;
+  }
+
+  return result;
+}
 
 export default function Marketplace() {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [showAI, setShowAI] = useState(false);
-  const [typeFilter, setTypeFilter] = useState("all");
 
   const { data: companies = [], isLoading } = useQuery({
     queryKey: ["companies", "approved"],
     queryFn: () => base44.entities.Company.filter({ status: "approved" }),
   });
 
-  const filtered = companies.filter((c) => {
-    const matchCat = category === "All" || c.category === category;
-    const matchType = typeFilter === "all" || c.type === typeFilter || c.type === "both";
-    const matchSearch =
-      !search ||
-      c.name?.toLowerCase().includes(search.toLowerCase()) ||
-      c.description?.toLowerCase().includes(search.toLowerCase()) ||
-      c.tags?.toLowerCase().includes(search.toLowerCase()) ||
-      c.location?.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchType && matchSearch;
-  });
-
-  const featured = filtered.filter((c) => c.is_featured);
-  const rest = filtered.filter((c) => !c.is_featured);
+  const filtered = applyFiltersAndSort(companies, search, filters);
+  const featured = filters.sort === "featured" ? filtered.filter((c) => c.is_featured) : [];
+  const rest = filters.sort === "featured" ? filtered.filter((c) => !c.is_featured) : filtered;
 
   return (
     <div className="pt-20 sm:pt-24 min-h-screen">
@@ -92,42 +147,14 @@ export default function Marketplace() {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="sticky top-[69px] z-40 bg-background/95 backdrop-blur-md border-b border-border/50 py-3 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                className={`px-3 py-1 rounded-full text-xs font-inter transition-all ${
-                  category === cat
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-          <div className="sm:ml-auto flex items-center gap-2 shrink-0">
-            {["all", "physical", "digital"].map((t) => (
-              <button
-                key={t}
-                onClick={() => setTypeFilter(t)}
-                className={`px-3 py-1 rounded-full text-xs font-inter capitalize transition-all ${
-                  typeFilter === t
-                    ? "bg-blue-700 text-white"
-                    : "bg-card border border-border text-muted-foreground hover:border-blue-600/50"
-                }`}
-              >
-                {t === "all" ? "All Types" : t}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Advanced Filters */}
+      <div className="sticky top-[69px] z-40">
+        <MarketplaceFilters
+          filters={filters}
+          onChange={setFilters}
+          resultCount={filtered.length}
+        />
+      </div>
 
       {/* Content */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -162,14 +189,22 @@ export default function Marketplace() {
               <div className="text-center py-24">
                 <p className="font-cinzel text-xl text-foreground mb-2">No matches found</p>
                 <p className="font-inter text-sm text-muted-foreground mb-6">
-                  Try our AI search or browse the full directory.
+                  Try adjusting your filters or use AI search.
                 </p>
-                <button
-                  onClick={() => setShowAI(true)}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-cinzel text-sm tracking-wider"
-                >
-                  <Sparkles className="w-4 h-4" /> Ask AI
-                </button>
+                <div className="flex items-center justify-center gap-3 flex-wrap">
+                  <button
+                    onClick={() => { setFilters(DEFAULT_FILTERS); setSearch(""); }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 border border-border text-muted-foreground rounded-lg font-inter text-sm hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    Clear Filters
+                  </button>
+                  <button
+                    onClick={() => setShowAI(true)}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-cinzel text-sm tracking-wider"
+                  >
+                    <Sparkles className="w-4 h-4" /> Ask AI
+                  </button>
+                </div>
               </div>
             )}
 
