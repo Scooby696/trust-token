@@ -109,6 +109,18 @@ export const SPOTLIGHT_10 = [
   },
   {
     rank: 10,
+    name: "Raydium",
+    location: "United States",
+    founded: 2021,
+    employees: "11-50",
+    desc: "The leading automated market maker (AMM) and liquidity provider built on Solana. Raydium powers the TRUST token swap and thousands of Solana-native token pairs with lightning-fast trades, concentrated liquidity, and deep DEX integrations.",
+    tags: ["DeFi", "AMM", "Solana", "Liquidity"],
+    url: "https://raydium.io/swap/?inputMint=sol&outputMint=4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+    highlight: "⭐ SPONSORED · TRUST Token Swap · Solana AMM",
+    sponsored: true,
+  },
+  {
+    rank: 11,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -230,6 +242,7 @@ export const ALL_100_DIGITAL = [
   { name: "Zera Labs", category: "Identity & Security", location: "United States", founded: 2024, desc: "Pioneering the new era of digital cash with zero-knowledge privacy. Turns crypto assets into private, portable, and secure digital cash via a unified ZK pool — enabling shielded balances, offline P2P payments, and seamless DeFi hooks built on Solana.", url: "https://zeralabs.org/", sponsored: true },
   { name: "CoinGecko", category: "Analytics & Compliance", location: "United States", founded: 2014, desc: "The world's largest independent crypto data aggregator tracking 10,000+ coins across 700+ exchanges with real-time prices, market cap, and on-chain analytics.", url: "https://www.coingecko.com/", sponsored: true },
   { name: "CoinMarketCap", category: "Analytics & Compliance", location: "United States", founded: 2013, desc: "The world's most-referenced crypto market data platform tracking prices, volume, and market cap for thousands of digital assets — the go-to reference for traders and institutions.", url: "https://coinmarketcap.com/", sponsored: true },
+  { name: "Raydium", category: "DeFi", location: "United States", founded: 2021, desc: "The leading AMM and liquidity provider on Solana. Powers the TRUST token swap and thousands of Solana-native token pairs with lightning-fast trades and deep DEX integrations.", url: "https://raydium.io/swap/?inputMint=sol&outputMint=4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R", sponsored: true },
   // Exchanges
   { name: "Coinbase", category: "Exchange", location: "San Francisco, CA", founded: 2012, desc: "America's largest regulated crypto exchange, publicly listed on NASDAQ. Serving 100M+ users.", url: "https://www.coinbase.com/" },
   { name: "Kraken", category: "Exchange", location: "San Francisco, CA", founded: 2011, desc: "One of the world's oldest crypto exchanges offering spot, futures, staking, and OTC trading.", url: "https://www.kraken.com/" },
