@@ -22,23 +22,33 @@ const CATEGORY_COLORS = {
 };
 
 function SpotlightCard({ company, index }) {
+  const isSponsored = !!company.sponsored;
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.07 }}
-      className="relative bg-gradient-to-br from-card via-card to-primary/5 border border-primary/30 rounded-xl p-6 hover:border-primary/60 transition-all group flex flex-col"
+      className={`relative rounded-xl p-6 transition-all group flex flex-col ${
+        isSponsored
+          ? "bg-gradient-to-br from-primary/20 via-card to-yellow-900/10 border-2 border-primary shadow-lg shadow-primary/20 hover:border-primary/80"
+          : "bg-gradient-to-br from-card via-card to-primary/5 border border-primary/30 hover:border-primary/60"
+      }`}
     >
-      <div className="absolute -top-3 -left-3 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-cinzel font-bold text-xs shadow-lg">
+      {isSponsored && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-primary text-primary-foreground rounded-full text-[10px] font-inter font-bold tracking-widest uppercase shadow-lg whitespace-nowrap">
+          ★ Sponsored #1 Spot
+        </div>
+      )}
+      <div className={`absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center font-cinzel font-bold text-xs shadow-lg ${isSponsored ? "bg-primary text-primary-foreground ring-2 ring-yellow-400" : "bg-primary text-primary-foreground"}`}>
         #{company.rank}
       </div>
 
       <div className="flex items-start justify-between mb-3">
-        <span className={`px-2 py-0.5 rounded-full text-xs font-inter ${CATEGORY_COLORS[company.category] || "bg-muted text-muted-foreground"}`}>
+        <span className={`px-2 py-0.5 rounded-full text-xs font-inter ${CATEGORY_COLORS[company.category] || CATEGORY_COLORS[company.tags?.[0]] || "bg-muted text-muted-foreground"}`}>
           {company.tags?.[0]}
         </span>
-        <Star className="w-4 h-4 text-primary fill-primary shrink-0" />
+        <Star className={`w-4 h-4 shrink-0 ${isSponsored ? "text-yellow-400 fill-yellow-400" : "text-primary fill-primary"}`} />
       </div>
 
       <h3 className="font-cinzel font-bold text-foreground text-lg group-hover:text-primary transition-colors mb-1">

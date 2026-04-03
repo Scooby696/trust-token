@@ -1,6 +1,18 @@
 export const SPOTLIGHT_10 = [
   {
     rank: 1,
+    name: "Xeris",
+    location: "United States",
+    founded: 2023,
+    employees: "11-50",
+    desc: "The world's first hardware-secured triple consensus blockchain (PoW + PoS + PoH) optimized for high-frequency institutional RWA settlements. Xeris delivers unlimited liquidity and 10,000 TPS with immutable cryptographic proof — engineering the global standard for digital value exchange.",
+    tags: ["Blockchain Infrastructure", "RWA", "Institutional", "L1"],
+    url: "https://xerisweb.com/",
+    highlight: "⭐ SPONSORED · Triple Consensus L1 · 10,000 TPS",
+    sponsored: true,
+  },
+  {
+    rank: 2,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -11,7 +23,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NASDAQ Listed · 100M+ Users",
   },
   {
-    rank: 2,
+    rank: 3,
     name: "Ripple",
     location: "San Francisco, CA",
     founded: 2012,
