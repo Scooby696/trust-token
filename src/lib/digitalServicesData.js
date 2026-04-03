@@ -13,6 +13,18 @@ export const SPOTLIGHT_10 = [
   },
   {
     rank: 2,
+    name: "Zera Labs",
+    location: "United States",
+    founded: 2024,
+    employees: "11-50",
+    desc: "Pioneering the new era of digital cash with zero-knowledge privacy. Zera turns crypto assets into private, portable, and secure digital cash via a unified ZK pool — enabling shielded balances, offline P2P payments, and seamless DeFi hooks built on Solana.",
+    tags: ["Identity & Security", "DeFi", "ZK Proofs", "Privacy"],
+    url: "https://zeralabs.org/",
+    highlight: "⭐ SPONSORED · Zero-Knowledge · Offline P2P",
+    sponsored: true,
+  },
+  {
+    rank: 4,
     name: "Coinbase",
     location: "San Francisco, CA",
     founded: 2012,
@@ -23,7 +35,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NASDAQ Listed · 100M+ Users",
   },
   {
-    rank: 3,
+    rank: 5,
     name: "Ripple",
     location: "San Francisco, CA",
     founded: 2012,
@@ -34,7 +46,7 @@ export const SPOTLIGHT_10 = [
     highlight: "XRP Ledger · Global Payments",
   },
   {
-    rank: 3,
+    rank: 6,
     name: "Kraken",
     location: "San Francisco, CA",
     founded: 2011,
@@ -45,7 +57,7 @@ export const SPOTLIGHT_10 = [
     highlight: "Founded 2011 · Most Trusted",
   },
   {
-    rank: 4,
+    rank: 7,
     name: "Gemini",
     location: "New York, NY",
     founded: 2014,
@@ -56,7 +68,7 @@ export const SPOTLIGHT_10 = [
     highlight: "NYDFS Licensed · SOC 2 Certified",
   },
   {
-    rank: 5,
+    rank: 8,
     name: "Chainalysis",
     location: "New York, NY",
     founded: 2014,
@@ -67,7 +79,7 @@ export const SPOTLIGHT_10 = [
     highlight: "FBI & IRS Partner · 70+ Governments",
   },
   {
-    rank: 6,
+    rank: 9,
     name: "Paxos",
     location: "New York, NY",
     founded: 2012,
@@ -78,7 +90,7 @@ export const SPOTLIGHT_10 = [
     highlight: "OCC Trust Charter · PYUSD Issuer",
   },
   {
-    rank: 7,
+    rank: 10,
     name: "Circle",
     location: "Boston, MA",
     founded: 2013,
