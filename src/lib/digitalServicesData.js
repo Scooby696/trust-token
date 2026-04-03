@@ -136,6 +136,9 @@ export const SPOTLIGHT_10 = [
 ];
 
 export const ALL_100_DIGITAL = [
+  // Sponsored
+  { name: "Xeris", category: "Blockchain Infrastructure", location: "United States", founded: 2023, desc: "The world's first hardware-secured triple consensus blockchain (PoW + PoS + PoH) optimized for high-frequency institutional RWA settlements. Delivers unlimited liquidity and 10,000 TPS with immutable cryptographic proof.", url: "https://xerisweb.com/", sponsored: true },
+  { name: "Zera Labs", category: "Identity & Security", location: "United States", founded: 2024, desc: "Pioneering the new era of digital cash with zero-knowledge privacy. Turns crypto assets into private, portable, and secure digital cash via a unified ZK pool — enabling shielded balances, offline P2P payments, and seamless DeFi hooks built on Solana.", url: "https://zeralabs.org/", sponsored: true },
   // Exchanges
   { name: "Coinbase", category: "Exchange", location: "San Francisco, CA", founded: 2012, desc: "America's largest regulated crypto exchange, publicly listed on NASDAQ. Serving 100M+ users.", url: "https://www.coinbase.com/" },
   { name: "Kraken", category: "Exchange", location: "San Francisco, CA", founded: 2011, desc: "One of the world's oldest crypto exchanges offering spot, futures, staking, and OTC trading.", url: "https://www.kraken.com/" },

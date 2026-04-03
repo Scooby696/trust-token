@@ -59,10 +59,19 @@ export default function ProviderCard({ company, index, spotlight = false }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: (index % 8) * 0.04 }}
-        className={`bg-card border rounded-xl overflow-hidden flex flex-col transition-all group ${
-          spotlight ? "border-primary/40 hover:border-primary/70" : "border-border/50 hover:border-primary/30"
+        className={`relative bg-card border rounded-xl overflow-hidden flex flex-col transition-all group ${
+          company.sponsored
+            ? "border-primary/60 hover:border-primary shadow-md shadow-primary/10"
+            : spotlight
+            ? "border-primary/40 hover:border-primary/70"
+            : "border-border/50 hover:border-primary/30"
         }`}
       >
+        {company.sponsored && (
+          <div className="bg-primary text-primary-foreground text-center py-1 text-[10px] font-cinzel tracking-widest font-bold">
+            ★ SPONSORED
+          </div>
+        )}
         <div className="p-4 flex-1 flex flex-col">
           <div className="flex items-start justify-between mb-2">
             <span className={`px-2 py-0.5 rounded-full text-xs font-inter ${CATEGORY_COLORS[company.category] || "bg-muted text-muted-foreground"}`}>
