@@ -25,6 +25,7 @@ export default function Navbar() {
     { label: "Defense", to: "/defense" },
     { label: "Digital", to: "/digital" },
     { label: "Companies", to: "/companies" },
+    { label: "News", to: "/news" },
     { label: "Our Mission", to: "/mission" },
     { label: "Apply", to: "/apply" },
     {

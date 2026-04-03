@@ -17,6 +17,7 @@ import Hundred from './pages/Hundred';
 import Defense from './pages/Defense';
 import DigitalServices from './pages/DigitalServices';
 import ApplicationStatus from './pages/ApplicationStatus';
+import News from './pages/News';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -51,6 +52,7 @@ const AuthenticatedApp = () => {
         <Route path="/defense" element={<Defense />} />
         <Route path="/digital" element={<DigitalServices />} />
         <Route path="/status" element={<ApplicationStatus />} />
+        <Route path="/news" element={<News />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
