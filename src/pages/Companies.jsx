@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Search } from "lucide-react";
+import { ExternalLink, Search, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import AICompanyAnalysis from "../components/AICompanyAnalysis";
 
 // Curated list aggregated from the three source sites
 const CURATED_COMPANIES = [
@@ -55,6 +56,7 @@ export default function Companies() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [source, setSource] = useState("all");
+  const [analysisCompany, setAnalysisCompany] = useState(null);
 
   const filtered = CURATED_COMPANIES.filter((c) => {
     const matchCat = category === "All" || c.category === category;
@@ -110,29 +112,36 @@ export default function Companies() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((c, i) => (
-            <motion.a
+            <motion.div
               key={c.name}
-              href={c.url}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 9) * 0.05 }}
-              className="group bg-card border border-border/50 rounded-lg p-5 hover:border-primary/40 transition-all"
+              className="group bg-card border border-border/50 rounded-lg p-5 hover:border-primary/40 transition-all flex flex-col"
             >
               <div className="flex items-start justify-between mb-2">
-                <span className="font-cinzel font-semibold text-foreground group-hover:text-primary transition-colors text-sm">{c.name}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground shrink-0 mt-0.5" />
+                <span className="font-cinzel font-semibold text-foreground text-sm">{c.name}</span>
+                <a href={c.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground hover:text-primary transition-colors shrink-0 mt-0.5" />
+                </a>
               </div>
-              <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-3">{c.desc}</p>
-              <div className="flex items-center gap-2 flex-wrap">
+              <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-3 flex-1">{c.desc}</p>
+              <div className="flex items-center gap-2 flex-wrap mb-3">
                 <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-inter">{c.category}</span>
                 <span className="text-xs text-muted-foreground font-inter">{c.location}</span>
               </div>
-            </motion.a>
+              <button
+                onClick={() => setAnalysisCompany(c)}
+                className="flex items-center justify-center gap-1.5 w-full py-1.5 bg-primary/5 border border-primary/20 text-primary rounded-lg text-xs font-inter hover:bg-primary/15 transition-colors"
+              >
+                <Sparkles className="w-3 h-3" /> AI Analysis
+              </button>
+            </motion.div>
           ))}
         </div>
+
+        {analysisCompany && <AICompanyAnalysis company={analysisCompany} onClose={() => setAnalysisCompany(null)} />}
 
         <div className="mt-12 text-center">
           <p className="font-inter text-sm text-muted-foreground mb-4">Are you an American maker or business?</p>

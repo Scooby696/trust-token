@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, MapPin, Star, MessageSquare, ChevronDown, ChevronUp } from "lucide-react";
+import { ExternalLink, MapPin, Star, MessageSquare, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 
@@ -27,7 +27,7 @@ function StarRow({ rating, size = "sm" }) {
   );
 }
 
-export default function CompanyListingCard({ company, index, onReview }) {
+export default function CompanyListingCard({ company, index, onReview, onAnalyze }) {
   const [expanded, setExpanded] = useState(false);
 
   const { data: reviews = [] } = useQuery({
@@ -100,15 +100,23 @@ export default function CompanyListingCard({ company, index, onReview }) {
       )}
 
       {/* Actions */}
-      <div className="flex items-center gap-2 px-4 pb-4 mt-auto">
-        <a href={company.url} target="_blank" rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-primary/10 text-primary rounded-lg text-xs font-inter hover:bg-primary/20 transition-colors">
-          Visit <ExternalLink className="w-3 h-3" />
-        </a>
-        <button onClick={onReview}
-          className="flex items-center justify-center gap-1.5 px-3 py-2 bg-card border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-          <MessageSquare className="w-3 h-3" /> Review
-        </button>
+      <div className="flex flex-col gap-2 px-4 pb-4 mt-auto">
+        <div className="flex items-center gap-2">
+          <a href={company.url} target="_blank" rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-primary/10 text-primary rounded-lg text-xs font-inter hover:bg-primary/20 transition-colors">
+            Visit <ExternalLink className="w-3 h-3" />
+          </a>
+          <button onClick={onReview}
+            className="flex items-center justify-center gap-1.5 px-3 py-2 bg-card border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+            <MessageSquare className="w-3 h-3" /> Review
+          </button>
+        </div>
+        {onAnalyze && (
+          <button onClick={onAnalyze}
+            className="flex items-center justify-center gap-1.5 w-full py-1.5 bg-primary/5 border border-primary/20 text-primary rounded-lg text-xs font-inter hover:bg-primary/15 transition-colors">
+            <Sparkles className="w-3 h-3" /> AI Analysis
+          </button>
+        )}
       </div>
     </motion.div>
   );

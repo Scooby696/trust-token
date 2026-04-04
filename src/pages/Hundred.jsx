@@ -5,12 +5,14 @@ import { ALL_100_COMPANIES, CATEGORIES_100 } from "../lib/allAmericanCompanies";
 import CompanyListingCard from "../components/marketplace/CompanyListingCard";
 import AIShoppingAssistant from "../components/marketplace/AIShoppingAssistant";
 import ReviewModal from "../components/marketplace/ReviewModal";
+import AICompanyAnalysis from "../components/AICompanyAnalysis";
 
 export default function Hundred() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [showAI, setShowAI] = useState(false);
   const [reviewCompany, setReviewCompany] = useState(null);
+  const [analysisCompany, setAnalysisCompany] = useState(null);
 
   const filtered = ALL_100_COMPANIES.filter((c) => {
     const matchCat = category === "All" || c.category === category;
@@ -104,6 +106,7 @@ export default function Hundred() {
               company={company}
               index={i}
               onReview={() => setReviewCompany(company)}
+              onAnalyze={() => setAnalysisCompany(company)}
             />
           ))}
         </div>
@@ -122,6 +125,7 @@ export default function Hundred() {
 
       {showAI && <AIShoppingAssistant onClose={() => setShowAI(false)} />}
       {reviewCompany && <ReviewModal company={reviewCompany} onClose={() => setReviewCompany(null)} />}
+      {analysisCompany && <AICompanyAnalysis company={analysisCompany} onClose={() => setAnalysisCompany(null)} />}
     </div>
   );
 }
