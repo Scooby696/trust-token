@@ -251,10 +251,9 @@ export default function Home() {
               <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
                 Stake TRUST tokens on Streamflow and back America's premier marketplace ecosystem.
               </p>
-              <a href="https://app.streamflow.finance/staking" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary/10 border border-primary/30 text-primary rounded-lg hover:bg-primary/20 transition-colors">
-                Stake TRUST <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary/10 border border-primary/20 text-primary/50 rounded-lg cursor-not-allowed select-none">
+                Stake TRUST · Coming Soon
+              </div>
             </div>
           </div>
         </motion.div>
@@ -279,15 +278,9 @@ export default function Home() {
             honor America's Christian heritage and build towards a future grounded
             in faith and liberty.
           </p>
-          <a
-            href="https://app.streamflow.finance/staking"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            Stake on Streamflow
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none">
+            Stake TRUST · Coming Soon
+          </div>
         </motion.div>
       </section>
     </div>

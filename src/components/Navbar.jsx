@@ -37,7 +37,7 @@ const ALL_MOBILE_LINKS = [
   { label: "Home", to: "/" },
   ...PRIMARY_LINKS,
   ...MORE_LINKS,
-  { label: "Stake TRUST", href: "https://app.streamflow.finance/staking", external: true },
+  { label: "Stake TRUST · Coming Soon", href: "#", external: false },
 ];
 
 const STYLE_MAP = {
@@ -138,14 +138,9 @@ export default function Navbar() {
             </div>
 
             {/* Stake TRUST — gold CTA */}
-            <a
-              href="https://app.streamflow.finance/staking"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 font-cinzel text-xs tracking-wider px-4 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20"
-            >
-              Stake TRUST <ExternalLink className="w-3 h-3" />
-            </a>
+            <div className="flex items-center gap-1.5 font-cinzel text-xs tracking-wider px-4 py-1.5 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none">
+              Stake TRUST · Coming Soon
+            </div>
           </div>
 
           {/* Social Icons - Desktop */}

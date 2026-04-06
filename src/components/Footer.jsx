@@ -39,14 +39,7 @@ export default function Footer() {
             <Link to="/news" className="hover:text-primary transition-colors">News</Link>
             <Link to="/mission" className="hover:text-primary transition-colors">Mission</Link>
             <Link to="/quotes" className="hover:text-primary transition-colors">Quotes</Link>
-            <a
-              href="https://app.streamflow.finance/staking"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors flex items-center gap-1"
-            >
-              Stake <ExternalLink className="w-3 h-3" />
-            </a>
+            <span className="text-muted-foreground/40 cursor-not-allowed">Stake (Soon)</span>
           </div>
 
           <div className="flex items-center gap-4">
