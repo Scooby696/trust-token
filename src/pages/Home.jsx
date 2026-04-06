@@ -246,6 +246,10 @@ export default function Home() {
               </Link>
             </div>
             <div className="bg-card border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 border border-primary/30 rounded-full mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                <span className="font-cinzel text-[10px] text-primary tracking-widest uppercase">Coming Soon</span>
+              </div>
               <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">⚡ TRUST TOKEN · MADE IN USA DIGITAL</p>
               <h3 className="font-cinzel text-lg font-bold text-foreground mb-2">Power the Marketplace</h3>
               <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
