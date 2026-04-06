@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Shield, Cross } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import QuoteCard from "../components/QuoteCard";
+import LatestUpdates from "../components/LatestUpdates";
 
 const FEATURED_QUOTES = [
   {
@@ -262,6 +263,8 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <LatestUpdates />
 
       {/* CTA Section */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-border/30">
