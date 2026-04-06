@@ -267,6 +267,10 @@ export default function Home() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center"
         >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 border border-primary/30 rounded-full mb-4">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="font-cinzel text-xs text-primary tracking-widest uppercase">Coming Soon</span>
+          </div>
           <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
             Join the Movement
           </p>
