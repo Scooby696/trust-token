@@ -286,9 +286,15 @@ export default function Home() {
             honor America's Christian heritage and build towards a future grounded
             in faith and liberty.
           </p>
-          <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none">
+          <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none mb-6">
             Stake TRUST · Coming Soon
           </div>
+          <p className="font-inter text-sm text-muted-foreground">
+            Questions? Contact us at{" "}
+            <a href="mailto:madeintheusadigital@gmail.com" className="text-primary hover:text-primary/80 transition-colors">
+              madeintheusadigital@gmail.com
+            </a>
+          </p>
         </motion.div>
       </section>
     </div>

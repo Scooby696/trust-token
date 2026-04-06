@@ -63,9 +63,14 @@ export default function Footer() {
             </a>
           </div>
 
-          <p className="font-inter text-xs text-muted-foreground">
-            © {new Date().getFullYear()} MADEINUSA DIGITAL
-          </p>
+          <div className="text-center md:text-right">
+            <a href="mailto:madeintheusadigital@gmail.com" className="font-inter text-xs text-muted-foreground hover:text-primary transition-colors">
+              madeintheusadigital@gmail.com
+            </a>
+            <p className="font-inter text-xs text-muted-foreground mt-1">
+              © {new Date().getFullYear()} MADEINUSA DIGITAL
+            </p>
+          </div>
         </div>
       </div>
     </footer>
