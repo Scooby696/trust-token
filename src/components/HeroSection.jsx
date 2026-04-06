@@ -77,19 +77,20 @@ export default function HeroSection() {
               Our Mission
             </Button>
           </Link>
-          <a
-            href="https://app.streamflow.finance/staking"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center gap-1.5 px-2.5 py-0.5 bg-primary/10 border border-primary/30 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              <span className="font-cinzel text-[10px] text-primary tracking-widest uppercase">Coming Soon</span>
+            </div>
             <Button
               size="lg"
               variant="outline"
-              className="font-cinzel tracking-wider text-sm px-8 py-6 border-primary/50 text-primary hover:bg-primary/10"
+              disabled
+              className="font-cinzel tracking-wider text-sm px-8 py-6 border-primary/20 text-primary/50 cursor-not-allowed select-none"
             >
-              Stake TRUST <ExternalLink className="w-4 h-4 ml-2" />
+              Stake TRUST
             </Button>
-          </a>
+          </div>
         </motion.div>
       </div>
 
