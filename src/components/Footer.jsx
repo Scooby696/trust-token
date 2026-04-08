@@ -16,8 +16,33 @@ const TelegramIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="bg-background border-t border-border/50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-background border-t border-border/50">
+      {/* Staking Promo Bar */}
+      <a
+        href="https://app.streamflow.finance/staking?search=Trust"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full bg-gradient-to-r from-blue-950 via-primary/20 to-blue-950 border-b border-primary/30 hover:border-primary/60 transition-colors group"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span className="font-cinzel text-xs font-bold text-red-400 tracking-[0.2em] uppercase">⚡ STAKING LIVE ON STREAMFLOW</span>
+          </div>
+          <div className="flex items-center gap-4 font-inter text-xs text-muted-foreground">
+            <span className="text-primary font-bold">30% APY</span>
+            <span className="text-border">·</span>
+            <span>3-Month Lock Intervals</span>
+            <span className="text-border">·</span>
+            <span>50% of Supply Stakeable</span>
+            <span className="text-border">·</span>
+            <span>Daily Rewards</span>
+          </div>
+          <span className="font-cinzel text-xs text-primary group-hover:text-primary/80 underline underline-offset-2 tracking-wider">Stake Now →</span>
+        </div>
+      </a>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <p className="font-cinzel text-primary font-bold tracking-widest text-lg">
@@ -72,7 +97,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-      </div>
+        </div>
     </footer>
   );
 }
