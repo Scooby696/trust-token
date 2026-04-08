@@ -35,6 +35,7 @@ export default function News() {
   const [category, setCategory] = useState("all");
   const [lastFetched, setLastFetched] = useState(null);
   const [cache, setCache] = useState({});
+  const [nextRefreshIn, setNextRefreshIn] = useState(300);
 
   const fetchNews = async (cat) => {
     if (cache[cat]) {
@@ -91,6 +92,18 @@ Return ONLY valid JSON array. No extra text.`;
 
   useEffect(() => {
     fetchNews(category);
+  }, [category]);
+
+  // Auto-refresh every 5 minutes, always bypassing cache
+  useEffect(() => {
+    setNextRefreshIn(300);
+    const countdown = setInterval(() => setNextRefreshIn((s) => Math.max(0, s - 1)), 1000);
+    const interval = setInterval(() => {
+      setCache((prev) => { const next = { ...prev }; delete next[category]; return next; });
+      fetchNews(category);
+      setNextRefreshIn(300);
+    }, 5 * 60 * 1000);
+    return () => { clearInterval(interval); clearInterval(countdown); };
   }, [category]);
 
   const handleRefresh = () => {
@@ -166,7 +179,7 @@ Return ONLY valid JSON array. No extra text.`;
           <div className="ml-auto flex items-center gap-2 shrink-0">
             {lastFetched && (
               <span className="font-inter text-xs text-muted-foreground/60 whitespace-nowrap hidden sm:block">
-                Updated {lastFetched.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                Updated {lastFetched.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} · refreshes in {Math.floor(nextRefreshIn / 60)}:{String(nextRefreshIn % 60).padStart(2, "0")}
               </span>
             )}
             <button
