@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, Shield, Cross } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import QuoteCard from "../components/QuoteCard";
 import LatestUpdates from "../components/LatestUpdates";
+import USAFactsFigures from "../components/USAFactsFigures";
 
 const FEATURED_QUOTES = [
   {
@@ -265,6 +266,8 @@ export default function Home() {
       </section>
 
       <LatestUpdates />
+
+      <USAFactsFigures />
 
       {/* CTA Section */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-border/30">
