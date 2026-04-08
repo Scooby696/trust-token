@@ -21,6 +21,7 @@ const PRIMARY_LINKS = [
   { label: "Digital", to: "/digital", style: "cyan" },
   { label: "Defense", to: "/defense", style: "red" },
   { label: "News", to: "/news", style: "default" },
+  { label: "Shop", to: "/shop", style: "blue" },
 ];
 
 // Secondary items in a "More" dropdown
