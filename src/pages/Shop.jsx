@@ -39,7 +39,7 @@ export default function Shop() {
             <div className="flex items-center justify-center gap-3 mb-4">
               <ShoppingBag className="w-6 h-6 text-primary" />
               <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">
-                MADE IN USA DIGITAL · Shop American
+                MADE IN THE USA DIGITAL · Shop American
               </p>
               <ShoppingBag className="w-6 h-6 text-primary" />
             </div>

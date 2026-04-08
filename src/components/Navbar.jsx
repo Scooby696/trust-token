@@ -71,7 +71,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3 shrink-0">
             <div className="flex flex-col leading-tight">
               <span className="font-cinzel text-primary font-bold text-base sm:text-lg tracking-widest">
-                MADE IN USA DIGITAL
+                MADE IN THE USA DIGITAL
               </span>
               <span className="font-inter text-muted-foreground text-xs tracking-wider">powered by TRUST TOKEN</span>
             </div>

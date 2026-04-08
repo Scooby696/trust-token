@@ -56,10 +56,10 @@ export default function Mission() {
             </h1>
             <div className="w-32 h-0.5 bg-primary mx-auto mb-6" />
             <p className="font-cinzel text-xl sm:text-2xl text-primary tracking-wider font-semibold mb-8">
-              MADE IN USA DIGITAL
+              MADE IN THE USA DIGITAL
             </p>
             <p className="font-inter text-base sm:text-lg text-white/75 max-w-3xl mx-auto leading-relaxed">
-              MADE IN USA DIGITAL, powered by TRUST TOKEN, exists to rebuild trust in cryptocurrency and the broader digital economy by creating a <strong className="text-white">transparent, secure, and fully verifiable</strong> staking and rewards platform on Solana.
+              MADE IN THE USA DIGITAL, powered by TRUST TOKEN, exists to rebuild trust in cryptocurrency and the broader digital economy by creating a <strong className="text-white">transparent, secure, and fully verifiable</strong> staking and rewards platform on Solana.
             </p>
           </motion.div>
 

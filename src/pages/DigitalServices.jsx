@@ -116,7 +116,7 @@ export default function DigitalServices() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="flex items-center justify-center gap-3 mb-4">
               <Globe className="w-6 h-6 text-primary" />
-              <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">MADE IN USA DIGITAL · powered by TRUST TOKEN</p>
+              <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase">MADE IN THE USA DIGITAL · powered by TRUST TOKEN</p>
               <Globe className="w-6 h-6 text-primary" />
             </div>
             <h1 className="font-cinzel text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 leading-tight">
