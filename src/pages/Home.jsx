@@ -97,6 +97,76 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Founding Fathers Banking Warnings */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <p className="font-inter text-xs tracking-[0.3em] text-red-400 uppercase mb-3">
+            ⚠️ They Warned Us
+          </p>
+          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-foreground">
+            Founding Fathers on Central Banking
+          </h2>
+          <p className="font-inter text-sm text-muted-foreground mt-3 max-w-2xl mx-auto">
+            Over 200 years ago, the men who built America warned of the dangers of central banking, paper money, and government debt.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+          {[
+            {
+              quote: "Banking establishments are more dangerous than standing armies; and that the principle of spending money to be paid by posterity, under the name of funding, is but swindling futurity on a large scale.",
+              author: "Thomas Jefferson",
+              title: "3rd President of the United States",
+            },
+            {
+              quote: "Paper money has had the effect in your state that it will ever have, to ruin commerce, oppress the honest, and open the door to every species of fraud and injustice.",
+              author: "George Washington",
+              title: "1st President of the United States",
+            },
+            {
+              quote: "All the perplexities, confusion and distress in America arise not from defects in their Constitution, not from want of honor or virtue, so much as from the downright ignorance of the nature of coin, credit and circulation.",
+              author: "John Adams",
+              title: "2nd President of the United States",
+            },
+          ].map((q, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="bg-card border border-red-700/30 rounded-lg p-6 hover:border-red-500/50 transition-all"
+            >
+              <p className="font-cinzel text-3xl text-red-400/40 leading-none mb-3">"</p>
+              <p className="font-inter text-sm text-foreground/80 italic leading-relaxed mb-4">{q.quote}</p>
+              <div className="pt-3 border-t border-border/30">
+                <p className="font-cinzel text-sm font-semibold text-primary">{q.author}</p>
+                <p className="font-inter text-xs text-muted-foreground mt-0.5">{q.title}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <Link
+            to="/quotes"
+            className="inline-flex items-center gap-2 font-inter text-sm text-primary hover:text-primary/80 tracking-wider transition-colors"
+          >
+            View All Founding Fathers Quotes <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+      </section>
+
       {/* Featured Quotes */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/30">
         <motion.div
