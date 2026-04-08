@@ -1,6 +1,7 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import TokenPriceBar from "./TokenPriceBar";
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +42,8 @@ export default function Footer() {
           <span className="font-cinzel text-xs text-primary group-hover:text-primary/80 underline underline-offset-2 tracking-wider">Stake Now →</span>
         </div>
       </a>
+
+      <TokenPriceBar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
