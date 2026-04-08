@@ -112,9 +112,15 @@ export default function Mission() {
                 We are building the trusted gateway where crypto meets real American value — empowering users to <strong className="text-foreground">earn, verify, and support</strong> what is proudly Made in the USA.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-6 py-3 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none">
-                  Stake TRUST · Coming Soon
-                </div>
+                <a
+                  href="https://app.streamflow.finance/staking?search=Trust"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-ping"></span>
+                  ⚡ Stake TRUST · Live Now
+                </a>
                 <Link
                   to="/digital"
                   className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-6 py-3 border border-border text-muted-foreground rounded-lg hover:border-primary/40 hover:text-primary transition-colors"

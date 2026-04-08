@@ -139,9 +139,15 @@ export default function Navbar() {
             </div>
 
             {/* Stake TRUST — gold CTA */}
-            <div className="flex items-center gap-1.5 font-cinzel text-xs tracking-wider px-4 py-1.5 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none">
-              Stake TRUST · Coming Soon
-            </div>
+            <a
+              href="https://app.streamflow.finance/staking?search=Trust"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 font-cinzel text-xs tracking-wider px-4 py-1.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-ping"></span>
+              ⚡ Stake TRUST · LIVE
+            </a>
           </div>
 
           {/* Social Icons - Desktop */}

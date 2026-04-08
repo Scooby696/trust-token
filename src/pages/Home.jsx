@@ -247,19 +247,25 @@ export default function Home() {
                 Apply Now <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-            <div className="bg-card border border-border/50 rounded-xl p-5 hover:border-primary/30 transition-all">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 border border-primary/30 rounded-full mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                <span className="font-cinzel text-[10px] text-primary tracking-widest uppercase">Coming Soon</span>
+            <div className="bg-card border border-red-700/40 rounded-xl p-5 hover:border-red-500/60 transition-all">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-600/20 border border-red-500/50 rounded-full mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                <span className="font-cinzel text-[10px] text-red-400 tracking-widest uppercase">⚡ STAKING IS LIVE!</span>
               </div>
               <p className="font-inter text-xs tracking-[0.25em] text-primary uppercase mb-2">⚡ TRUST TOKEN · MADE IN USA DIGITAL</p>
               <h3 className="font-cinzel text-lg font-bold text-foreground mb-2">Power the Marketplace</h3>
               <p className="font-inter text-xs text-muted-foreground leading-relaxed mb-4">
-                Stake TRUST tokens on Streamflow and back America's premier marketplace ecosystem.
+                Stake TRUST tokens on Streamflow and back America's premier marketplace ecosystem. 30% APY · Daily Rewards.
               </p>
-              <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary/10 border border-primary/20 text-primary/50 rounded-lg cursor-not-allowed select-none">
-                Stake TRUST · Coming Soon
-              </div>
+              <a
+                href="https://app.streamflow.finance/staking?search=Trust"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-foreground animate-ping"></span>
+                Stake TRUST Now
+              </a>
             </div>
           </div>
         </motion.div>
