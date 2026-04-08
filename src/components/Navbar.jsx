@@ -32,6 +32,7 @@ const MORE_LINKS = [
   { label: "Quotes", to: "/quotes" },
   { label: "Apply", to: "/apply" },
   { label: "Track Status", to: "/status" },
+  { label: "Roadmap", to: "/roadmap" },
 ];
 
 const ALL_MOBILE_LINKS = [

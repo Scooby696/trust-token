@@ -90,6 +90,7 @@ export default function Footer() {
             <Link to="/companies" className="hover:text-primary transition-colors">Companies</Link>
             <Link to="/apply" className="hover:text-primary transition-colors">Apply</Link>
             <Link to="/news" className="hover:text-primary transition-colors">News</Link>
+            <Link to="/roadmap" className="hover:text-primary transition-colors">Roadmap</Link>
             <Link to="/mission" className="hover:text-primary transition-colors">Mission</Link>
             <Link to="/quotes" className="hover:text-primary transition-colors">Quotes</Link>
             <a href="https://app.streamflow.finance/staking?search=Trust" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-red-400 font-semibold">⚡ Stake TRUST · LIVE</a>
