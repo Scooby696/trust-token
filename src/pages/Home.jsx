@@ -265,6 +265,83 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* LIVE Staking Promo Banner */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-border/30">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto"
+        >
+          <div className="relative rounded-2xl overflow-hidden border-2 border-primary/60 bg-gradient-to-br from-primary/10 via-card to-blue-950/60 p-8 sm:p-12">
+            {/* Animated top stripe */}
+            <div className="absolute top-0 left-0 right-0 h-1 flex">
+              <div className="flex-1 bg-red-600" />
+              <div className="flex-1 bg-white/80" />
+              <div className="flex-1 bg-blue-700" />
+            </div>
+
+            {/* LIVE badge */}
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center gap-2 px-4 py-1.5 bg-red-600 text-white rounded-full shadow-lg shadow-red-600/40">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                <span className="font-cinzel text-xs font-bold tracking-[0.25em] uppercase">LIVE NOW</span>
+              </div>
+            </div>
+
+            <div className="text-center mb-8">
+              <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase mb-3">
+                TRUST TOKEN · Powered by Streamflow
+              </p>
+              <h2 className="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-3 leading-tight">
+                STAKE TRUST · EARN REWARDS
+              </h2>
+              <div className="w-24 h-0.5 bg-primary mx-auto mb-5" />
+              <p className="font-inter text-sm sm:text-base text-white/65 max-w-xl mx-auto leading-relaxed">
+                Support the Made in USA Digital ecosystem and earn industry-leading rewards by staking TRUST tokens on Streamflow.
+              </p>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+              {[
+                { value: "30%", label: "APY Rewards Rate", icon: "📈" },
+                { value: "3 MO", label: "Lock Intervals", icon: "🔒" },
+                { value: "Daily", label: "Rewards Distribution", icon: "💰" },
+                { value: "50%", label: "Max Supply Stakeable", icon: "🇺🇸" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="bg-background/50 border border-primary/20 rounded-xl p-4 text-center hover:border-primary/50 transition-colors"
+                >
+                  <div className="text-2xl mb-1">{stat.icon}</div>
+                  <p className="font-cinzel text-2xl sm:text-3xl font-bold text-primary">{stat.value}</p>
+                  <p className="font-inter text-xs text-muted-foreground mt-1 leading-snug">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="https://app.streamflow.finance/staking?search=Trust"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-10 py-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 animate-pulse"
+                style={{ animationDuration: "2.5s" }}
+              >
+                <span className="w-2 h-2 rounded-full bg-primary-foreground animate-ping inline-block"></span>
+                Stake TRUST Now on Streamflow
+              </a>
+            </div>
+
+            <p className="text-center font-inter text-xs text-muted-foreground/50 mt-5">
+              Staking live on Streamflow · TRUST Token on Solana · Not financial advice
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
       <LatestUpdates />
 
       <USAFactsFigures />
@@ -277,9 +354,9 @@ export default function Home() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 border border-primary/30 rounded-full mb-4">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span className="font-cinzel text-xs text-primary tracking-widest uppercase">Coming Soon</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600/20 border border-red-500/50 rounded-full mb-4">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span className="font-cinzel text-xs text-red-400 tracking-widest uppercase">Live Now</span>
           </div>
           <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
             Join the Movement
@@ -288,13 +365,17 @@ export default function Home() {
             Stake Your TRUST
           </h2>
           <p className="font-inter text-muted-foreground leading-relaxed mb-8">
-            Support the mission by staking TRUST tokens on Streamflow. Together we
-            honor America's Christian heritage and build towards a future grounded
-            in faith and liberty.
+            Stake TRUST tokens on Streamflow and earn <strong className="text-primary">30% APY</strong> with daily rewards distribution. 3-month lock intervals. Up to 50% of supply stakeable.
           </p>
-          <div className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary/20 text-primary/60 border border-primary/20 rounded-lg cursor-not-allowed select-none mb-6">
-            Stake TRUST · Coming Soon
-          </div>
+          <a
+            href="https://app.streamflow.finance/staking?search=Trust"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 mb-6"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary-foreground animate-ping"></span>
+            Stake TRUST on Streamflow
+          </a>
           <p className="font-inter text-sm text-muted-foreground">
             Questions? Contact us at{" "}
             <a href="mailto:madeintheusadigital@gmail.com" className="text-primary hover:text-primary/80 transition-colors">
