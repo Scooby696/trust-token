@@ -44,14 +44,15 @@ export default function HeroSection() {
           className="w-32 h-0.5 bg-primary mx-auto mb-6"
         />
 
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="font-cinzel text-xl sm:text-2xl md:text-3xl text-primary tracking-[0.2em] mb-8"
+          className="mb-8 flex flex-col items-center gap-1"
         >
-          MADE IN THE USA DIGITAL · TRUST TOKEN
-        </motion.h2>
+          <span className="font-cinzel text-xl sm:text-2xl md:text-3xl text-primary tracking-[0.2em]">MADE IN THE USA DIGITAL</span>
+          <span className="font-cinzel text-lg sm:text-xl md:text-2xl text-primary/80 tracking-[0.2em]">TRUST TOKEN</span>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
