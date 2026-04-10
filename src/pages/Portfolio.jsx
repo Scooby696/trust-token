@@ -7,6 +7,7 @@ import HoldingsGrid from "../components/portfolio/HoldingsGrid";
 import AIResearchPanel from "../components/portfolio/AIResearchPanel";
 import { loadWallet, saveWallet, clearWallet } from "../lib/walletStore";
 import PriceAlerts from "../components/portfolio/PriceAlerts";
+import RebalancingTool from "../components/portfolio/RebalancingTool";
 
 // Narrative classification by known tokens
 const NARRATIVE_MAP = {
@@ -429,6 +430,9 @@ export default function Portfolio() {
 
             {/* Price Alerts */}
             <PriceAlerts holdings={holdings} />
+
+            {/* AI Rebalancing */}
+            <RebalancingTool holdings={holdings} />
 
             {/* Holdings */}
             <div>
