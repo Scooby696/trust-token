@@ -61,6 +61,9 @@ export default function TradingTerminal() {
     return () => {};
   }, []);
 
+  const JUP_ENDPOINT = "https://api.jup.ag/swap/v2";
+  const JUP_HEADERS = { "x-api-key": "jup_f20a4f959ee8caf719dd48e1991dd529660caf1f63f3b8e50221a0ded51df302" };
+
   const initTerminal = () => {
     setTimeout(() => {
       if (!window.Jupiter) { setTerminalError(true); return; }
@@ -68,7 +71,8 @@ export default function TradingTerminal() {
         window.Jupiter.init({
           displayMode: "integrated",
           integratedTargetId: "jupiter-terminal-container",
-          endpoint: "https://rpc.ankr.com/solana",
+          endpoint: JUP_ENDPOINT,
+          requestWithHeaders: JUP_HEADERS,
           formProps: {
             initialInputMint: TOKEN_MINTS[selectedPair.from] || TOKEN_MINTS.SOL,
             initialOutputMint: TOKEN_MINTS[selectedPair.to] || TOKEN_MINTS.USDC,
@@ -91,7 +95,8 @@ export default function TradingTerminal() {
       window.Jupiter.init({
         displayMode: "integrated",
         integratedTargetId: "jupiter-terminal-container",
-        endpoint: "https://rpc.ankr.com/solana",
+        endpoint: JUP_ENDPOINT,
+        requestWithHeaders: JUP_HEADERS,
         formProps: {
           initialInputMint: TOKEN_MINTS[pair.from] || TOKEN_MINTS.SOL,
           initialOutputMint: TOKEN_MINTS[pair.to] || TOKEN_MINTS.USDC,
@@ -158,7 +163,8 @@ export default function TradingTerminal() {
         window.Jupiter.init({
           displayMode: "integrated",
           integratedTargetId: "jupiter-terminal-container",
-          endpoint: "https://solana.publicnode.com",
+          endpoint: JUP_ENDPOINT,
+          requestWithHeaders: JUP_HEADERS,
           formProps: {
             initialInputMint: TOKEN_MINTS[selectedPair.from],
             initialOutputMint: TOKEN_MINTS[selectedPair.to],
