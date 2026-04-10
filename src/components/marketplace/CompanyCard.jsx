@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ExternalLink, MapPin, Star, ShieldCheck } from "lucide-react";
 
@@ -10,6 +11,7 @@ const TYPE_COLORS = {
 
 export default function CompanyCard({ company, index, featured }) {
   return (
+    <Link to={`/business?id=${company.id}`}>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -68,5 +70,6 @@ export default function CompanyCard({ company, index, featured }) {
         </a>
       )}
     </motion.div>
+    </Link>
   );
 }
