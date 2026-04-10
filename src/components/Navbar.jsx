@@ -33,6 +33,7 @@ const MORE_LINKS = [
   { label: "Apply", to: "/apply" },
   { label: "Track Status", to: "/status" },
   { label: "Roadmap", to: "/roadmap" },
+  { label: "Dashboard", to: "/dashboard" },
 ];
 
 const ALL_MOBILE_LINKS = [

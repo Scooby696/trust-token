@@ -20,6 +20,7 @@ import ApplicationStatus from './pages/ApplicationStatus';
 import News from './pages/News';
 import Shop from './pages/Shop';
 import Roadmap from './pages/Roadmap';
+import Dashboard from './pages/Dashboard';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
         <Route path="/news" element={<News />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/roadmap" element={<Roadmap />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
