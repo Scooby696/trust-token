@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { loadWallet, saveWallet, clearWallet } from "../lib/walletStore";
+import KalshiPanel from "../components/trading/KalshiPanel";
 import { motion } from "framer-motion";
 import {
   Wallet, Zap, ExternalLink, RefreshCw, TrendingUp, BarChart2,
@@ -462,6 +463,9 @@ export default function TradingTerminal() {
                 ))}
               </div>
             </div>
+
+            {/* Kalshi Prediction Markets */}
+            <KalshiPanel />
 
             {/* Portfolio link */}
             <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-center">
