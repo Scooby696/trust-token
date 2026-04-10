@@ -67,7 +67,7 @@ export default function TradingTerminal() {
         window.Jupiter.init({
           displayMode: "integrated",
           integratedTargetId: "jupiter-terminal-container",
-          endpoint: "https://api.mainnet-beta.solana.com",
+          endpoint: "https://rpc.ankr.com/solana",
           formProps: {
             initialInputMint: TOKEN_MINTS[selectedPair.from] || TOKEN_MINTS.SOL,
             initialOutputMint: TOKEN_MINTS[selectedPair.to] || TOKEN_MINTS.USDC,
@@ -90,7 +90,7 @@ export default function TradingTerminal() {
       window.Jupiter.init({
         displayMode: "integrated",
         integratedTargetId: "jupiter-terminal-container",
-        endpoint: "https://api.mainnet-beta.solana.com",
+        endpoint: "https://rpc.ankr.com/solana",
         formProps: {
           initialInputMint: TOKEN_MINTS[pair.from] || TOKEN_MINTS.SOL,
           initialOutputMint: TOKEN_MINTS[pair.to] || TOKEN_MINTS.USDC,
