@@ -19,18 +19,23 @@ export default function CryptoTicker() {
   const [loading, setLoading] = useState(true);
 
   const fetchPrices = async () => {
-    const ids = COINS.map((c) => c.id).join(",");
-    const res = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
-    );
-    const data = await res.json();
-    const mapped = COINS.map((coin) => ({
-      symbol: coin.symbol,
-      price: data[coin.id]?.usd,
-      change: data[coin.id]?.usd_24h_change,
-    })).filter((c) => c.price != null);
-    setPrices(mapped);
-    setLoading(false);
+    try {
+      const ids = COINS.map((c) => c.id).join(",");
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+      );
+      if (!res.ok) return; // silently skip on 429 / errors, keep last known prices
+      const data = await res.json();
+      const mapped = COINS.map((coin) => ({
+        symbol: coin.symbol,
+        price: data[coin.id]?.usd ?? null,
+        change: data[coin.id]?.usd_24h_change ?? null,
+      })).filter((c) => c.price != null);
+      if (mapped.length > 0) setPrices(mapped);
+      setLoading(false);
+    } catch {
+      setLoading(false); // don't crash — keep showing last prices
+    }
   };
 
   useEffect(() => {
@@ -55,10 +60,12 @@ export default function CryptoTicker() {
               <span className="text-muted-foreground">
                 ${coin.price < 1 ? coin.price.toFixed(4) : coin.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
-              <span className={`flex items-center gap-0.5 ${isUp ? "text-green-400" : "text-red-400"}`}>
-                {isUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                {Math.abs(coin.change).toFixed(2)}%
-              </span>
+              {coin.change != null && (
+                <span className={`flex items-center gap-0.5 ${isUp ? "text-green-400" : "text-red-400"}`}>
+                  {isUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                  {Math.abs(coin.change).toFixed(2)}%
+                </span>
+              )}
               <span className="text-border mx-1">·</span>
             </span>
           );

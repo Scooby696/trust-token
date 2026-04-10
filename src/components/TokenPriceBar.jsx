@@ -9,10 +9,15 @@ export default function TokenPriceBar() {
 
   useEffect(() => {
     const fetchPrice = async () => {
-      const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
-      const json = await res.json();
-      const pair = json?.pairs?.[0];
-      if (pair) setData(pair);
+      try {
+        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        const pair = json?.pairs?.[0];
+        if (pair) setData(pair);
+      } catch {
+        // silently keep last known data on network failure
+      }
     };
     fetchPrice();
     const interval = setInterval(fetchPrice, 30000);
