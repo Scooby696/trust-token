@@ -7,38 +7,45 @@ import {
 import { base44 } from "@/api/base44Client";
 
 const KALSHI_BASE = "https://trading.kalshi.com";
-const KALSHI_API = "https://api.elections.kalshi.com/trade-api/v2";
+const KALSHI_API = "https://trading.kalshi.com/trade-api/v2";
 
 // Hardcoded crypto-relevant Kalshi market slugs / search terms
 const CRYPTO_SEARCH_TERMS = ["bitcoin", "ethereum", "crypto", "solana", "BTC", "ETH"];
 
 async function fetchKalshiCryptoMarkets() {
-  const res = await fetch(
-    `${KALSHI_API}/markets?status=open&limit=50&series_ticker=KXBTC`,
-    { headers: { Accept: "application/json" } }
-  );
-  if (res.ok) {
-    const data = await res.json();
-    if (data?.markets?.length > 0) return data.markets.slice(0, 15);
-  }
+  // Try BTC daily close series first
+  try {
+    const res = await fetch(
+      `${KALSHI_API}/markets?status=open&limit=50&series_ticker=KXBTCD`,
+      { headers: { Accept: "application/json" } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (data?.markets?.length > 0) return data.markets.slice(0, 15);
+    }
+  } catch {}
 
-  // Fallback: try generic crypto category
-  const res2 = await fetch(
-    `${KALSHI_API}/markets?status=open&limit=50`,
-    { headers: { Accept: "application/json" } }
-  );
-  if (!res2.ok) return [];
-  const data2 = await res2.json();
-  const markets = data2?.markets || [];
-  // Filter to crypto-relevant
-  return markets.filter((m) => {
-    const title = (m.title || m.subtitle || "").toLowerCase();
-    return CRYPTO_SEARCH_TERMS.some((t) => title.includes(t.toLowerCase()));
-  }).slice(0, 15);
+  // Fallback: all open markets filtered by crypto keywords
+  try {
+    const res2 = await fetch(
+      `${KALSHI_API}/markets?status=open&limit=100`,
+      { headers: { Accept: "application/json" } }
+    );
+    if (!res2.ok) return [];
+    const data2 = await res2.json();
+    const markets = data2?.markets || [];
+    return markets.filter((m) => {
+      const title = (m.title || m.subtitle || "").toLowerCase();
+      return CRYPTO_SEARCH_TERMS.some((t) => title.includes(t.toLowerCase()));
+    }).slice(0, 15);
+  } catch {
+    return [];
+  }
 }
 
-function ProbabilityBar({ yes_bid, yes_ask }) {
-  const pct = yes_bid != null ? Math.round(yes_bid * 100) : null;
+function ProbabilityBar({ yes_bid }) {
+  // Kalshi prices are in cents (0–99 integers)
+  const pct = yes_bid != null ? Math.round(yes_bid) : null;
   const color = pct >= 60 ? "bg-green-500" : pct >= 40 ? "bg-yellow-500" : "bg-red-500";
   if (pct == null) return null;
   return (
@@ -81,8 +88,9 @@ export default function KalshiPanel({ defaultOpen = false }) {
     setAiLoading(true);
     setAiAnalysis(null);
 
+    // yes_bid from Kalshi is already in cents (0–99 integers)
     const marketSummary = markets.map((m) => {
-      const prob = m.yes_bid != null ? Math.round(m.yes_bid * 100) : "?";
+      const prob = m.yes_bid != null ? Math.round(m.yes_bid) : "?";
       return `- "${m.title || m.subtitle}" → YES probability: ${prob}¢ (out of 100)`;
     }).join("\n");
 

@@ -158,7 +158,7 @@ export default function TradingTerminal() {
         window.Jupiter.init({
           displayMode: "integrated",
           integratedTargetId: "jupiter-terminal-container",
-          endpoint: "https://solana-mainnet.g.alchemy.com/v2/demo",
+          endpoint: "https://solana.publicnode.com",
           formProps: {
             initialInputMint: TOKEN_MINTS[selectedPair.from],
             initialOutputMint: TOKEN_MINTS[selectedPair.to],

@@ -34,12 +34,14 @@ async function fetchPriceHistory(coingeckoId, days) {
   }));
 }
 
+const KALSHI_API = "https://trading.kalshi.com/trade-api/v2";
+
 // Fetch resolved Kalshi crypto markets
 async function fetchKalshiResolved(tokenLabel) {
   const term = tokenLabel === "BTC" ? "bitcoin" : tokenLabel === "ETH" ? "ethereum" : "solana";
   try {
     const res = await fetch(
-      `https://api.elections.kalshi.com/trade-api/v2/markets?status=finalized&limit=50`,
+      `${KALSHI_API}/markets?status=settled&limit=100`,
       { headers: { Accept: "application/json" } }
     );
     if (!res.ok) return [];
@@ -56,9 +58,8 @@ async function fetchKalshiResolved(tokenLabel) {
         title: m.title || m.subtitle,
         close_date: m.close_time ? new Date(m.close_time).toISOString().split("T")[0] : null,
         result: m.result, // "yes" | "no"
-        final_yes_price: m.final_yes_count != null ? m.final_yes_count / 100 : null,
-        // last known yes price before close as probability
-        yes_price: m.yes_bid || m.last_price || null,
+        // yes_bid is in cents (0-99), convert to 0-1 for percentage math
+        yes_price: m.yes_bid != null ? m.yes_bid / 100 : (m.last_price != null ? m.last_price / 100 : null),
         volume: m.volume,
       }))
       .filter((m) => m.close_date);
