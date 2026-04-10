@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import IDVerificationStep from "../components/IDVerificationStep";
 import { motion } from "framer-motion";
 import { CheckCircle2, Upload, ShieldCheck, AlertCircle, ArrowRight, Clock } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
 
-const STEPS = ["Business Info", "USA Verification", "Certifications & Docs", "Review & Submit"];
+const STEPS = ["Business Info", "USA Verification", "ID Verification", "Certifications & Docs", "Review & Submit"];
 
 const CATEGORIES = ["Clothing", "Accessories", "Home & Kitchen", "Food & Beverage", "Health & Beauty", "Technology", "Outdoor & Sport", "Furniture", "Tools & Hardware", "Services & Digital", "Other"];
 const STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
@@ -16,6 +17,7 @@ export default function Apply() {
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [uploadingField, setUploadingField] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [idVerificationResult, setIdVerificationResult] = useState(null);
   const [form, setForm] = useState({
     business_name: "", owner_name: "", email: "", phone: "",
     website: "", location: "", state_of_incorporation: "",
@@ -38,7 +40,12 @@ export default function Apply() {
 
   const handleSubmit = async () => {
     setSubmitting(true);
-    await base44.entities.CreatorApplication.create({ ...form, status: "submitted", kyc_submitted: true });
+    await base44.entities.CreatorApplication.create({
+      ...form,
+      status: "submitted",
+      kyc_submitted: true,
+      id_document_url: form.id_document_url || idVerificationResult?.frontUrl || "",
+    });
     setSubmitting(false);
     setSubmittedEmail(form.email);
     setSubmitted(true);
@@ -177,11 +184,21 @@ export default function Apply() {
             </div>
           )}
 
-          {/* Step 2: Certifications & Documents */}
+          {/* Step 2: ID Verification */}
           {step === 2 && (
+            <IDVerificationStep
+              ownerName={form.owner_name}
+              onVerified={(result) => setIdVerificationResult(result)}
+              verificationResult={idVerificationResult}
+              setVerificationResult={setIdVerificationResult}
+            />
+          )}
+
+          {/* Step 3: Certifications & Documents */}
+          {step === 3 && (
             <div className="space-y-6">
               <h3 className="font-cinzel font-semibold text-foreground text-lg mb-1">Certifications & Documents</h3>
-              <p className="font-inter text-xs text-muted-foreground mb-4">Upload your Made in USA certifications, government ID, and business license. Certifications significantly speed up approval.</p>
+              <p className="font-inter text-xs text-muted-foreground mb-4">Upload your Made in USA certifications and business license. Certifications significantly speed up approval.</p>
 
               {/* Certification section */}
               <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 space-y-4">
@@ -205,14 +222,6 @@ export default function Apply() {
                 />
               </div>
 
-              {/* Required documents */}
-              <UploadField
-                label="Government-Issued ID (owner) *"
-                hint="Driver's license, passport, or state ID"
-                value={form.id_document_url}
-                uploading={uploadingField === "id_document_url"}
-                onChange={(e) => handleFileUpload(e, "id_document_url")}
-              />
               <UploadField
                 label="Business License or Articles of Incorporation"
                 hint="State business registration document"
@@ -223,8 +232,8 @@ export default function Apply() {
             </div>
           )}
 
-          {/* Step 3: Review */}
-          {step === 3 && (
+          {/* Step 4: Review */}
+          {step === 4 && (
             <div className="space-y-4">
               <h3 className="font-cinzel font-semibold text-foreground text-lg mb-4">Review & Submit</h3>
               <ReviewRow label="Business" value={form.business_name} />
@@ -235,9 +244,10 @@ export default function Apply() {
               <ReviewRow label="Type" value={form.type} />
               <ReviewRow label="EIN" value={form.ein_number} />
               <ReviewRow label="State Inc." value={form.state_of_incorporation} />
+              <ReviewRow label="ID Verification" value={idVerificationResult ? `✓ ${idVerificationResult.verification_status} (${Math.round(idVerificationResult.overall_verification_score)}/100)` : "Not completed"} />
+              <ReviewRow label="ID Country" value={idVerificationResult?.issuing_country || "—"} />
               <ReviewRow label="Certification" value={form.certification_type || "Not provided"} />
               <ReviewRow label="Cert. Doc" value={form.certification_url ? "✓ Uploaded" : "Not provided"} />
-              <ReviewRow label="ID Doc" value={form.id_document_url ? "✓ Uploaded" : "Not provided"} />
               <ReviewRow label="License" value={form.business_license_url ? "✓ Uploaded" : "Not provided"} />
 
               <div className="border-t border-border/50 pt-4">
@@ -263,7 +273,9 @@ export default function Apply() {
             {step < STEPS.length - 1 ? (
               <button
                 onClick={() => setStep((s) => s + 1)}
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors"
+                disabled={step === 2 && !idVerificationResult}
+                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors disabled:opacity-50"
+                title={step === 2 && !idVerificationResult ? "Please complete ID verification first" : ""}
               >
                 Continue
               </button>
