@@ -6,6 +6,7 @@ import HeroSection from "../components/HeroSection";
 import QuoteCard from "../components/QuoteCard";
 import LatestUpdates from "../components/LatestUpdates";
 import USAFactsFigures from "../components/USAFactsFigures";
+import WalletConnectHero from "../components/portfolio/WalletConnectHero";
 
 const FEATURED_QUOTES = [
   {
@@ -417,6 +418,8 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <WalletConnectHero />
 
       <LatestUpdates />
 

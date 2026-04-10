@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { loadWallet, saveWallet, clearWallet } from "../lib/walletStore";
 import { motion } from "framer-motion";
 import {
   Wallet, Zap, ExternalLink, RefreshCw, TrendingUp, BarChart2,
@@ -34,7 +35,7 @@ export default function TradingTerminal() {
   const terminalRef = useRef(null);
   const [terminalLoaded, setTerminalLoaded] = useState(false);
   const [terminalError, setTerminalError] = useState(false);
-  const [wallet, setWallet] = useState(null);
+  const [wallet, setWallet] = useState(() => loadWallet());
   const [connecting, setConnecting] = useState(false);
   const [connError, setConnError] = useState("");
   const [showWalletMenu, setShowWalletMenu] = useState(false);
@@ -117,6 +118,12 @@ export default function TradingTerminal() {
   }, []);
 
   // Connect wallet
+  useEffect(() => {
+    const handler = (e) => setWallet(e.detail);
+    window.addEventListener("walletChanged", handler);
+    return () => window.removeEventListener("walletChanged", handler);
+  }, []);
+
   const connectWallet = async (walletDef) => {
     setConnecting(true);
     setConnError("");
@@ -131,6 +138,8 @@ export default function TradingTerminal() {
 
     const resp = await provider.connect();
     const address = resp.publicKey.toString();
+    const info = { address, name: walletDef.name, walletName: walletDef.name };
+    saveWallet(info);
     setWallet({ address, name: walletDef.name, provider });
 
     // Pass wallet to Jupiter terminal if loaded
@@ -178,6 +187,7 @@ export default function TradingTerminal() {
 
   const disconnectWallet = async () => {
     if (wallet?.provider?.disconnect) await wallet.provider.disconnect();
+    clearWallet();
     setWallet(null);
   };
 

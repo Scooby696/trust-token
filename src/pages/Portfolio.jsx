@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Wallet, LogOut, RefreshCw, Sparkles, Loader2, AlertTriangle, Shield, TrendingUp, BarChart2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import WalletConnectModal from "../components/portfolio/WalletConnectModal";
 import HoldingsGrid from "../components/portfolio/HoldingsGrid";
 import AIResearchPanel from "../components/portfolio/AIResearchPanel";
+import { loadWallet, saveWallet, clearWallet } from "../lib/walletStore";
 
 // Narrative classification by known tokens
 const NARRATIVE_MAP = {
@@ -216,7 +217,7 @@ const RISK_LABEL_COLOR = {
 };
 
 export default function Portfolio() {
-  const [wallet, setWallet] = useState(null);
+  const [wallet, setWallet] = useState(() => loadWallet());
   const [showConnect, setShowConnect] = useState(false);
   const [holdings, setHoldings] = useState([]);
   const [loadingHoldings, setLoadingHoldings] = useState(false);
@@ -225,9 +226,20 @@ export default function Portfolio() {
   const [selectedToken, setSelectedToken] = useState(null);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    const handler = (e) => setWallet(e.detail);
+    window.addEventListener("walletChanged", handler);
+    return () => window.removeEventListener("walletChanged", handler);
+  }, []);
+
+  useEffect(() => {
+    if (wallet && holdings.length === 0) handleConnect(wallet);
+  }, []);
+
   const handleConnect = async (walletInfo) => {
     setShowConnect(false);
     setWallet(walletInfo);
+    saveWallet(walletInfo);
     setError("");
     setLoadingHoldings(true);
     const h = await fetchWalletHoldings(walletInfo.address);
@@ -243,6 +255,7 @@ export default function Portfolio() {
   };
 
   const handleDisconnect = () => {
+    clearWallet();
     setWallet(null);
     setHoldings([]);
     setPortfolioRating(null);
