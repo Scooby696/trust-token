@@ -62,9 +62,17 @@ export default function WalletConnectModal({ onConnect, onClose }) {
       return;
     }
 
-    const resp = await provider.connect();
-    const address = resp.publicKey.toString();
-    onConnect({ address, walletName: wallet.name });
+    try {
+      const resp = await provider.connect();
+      const address = resp.publicKey.toString();
+      onConnect({ address, walletName: wallet.name });
+    } catch (err) {
+      if (err?.code === 4001 || err?.message?.includes("rejected") || err?.message?.includes("cancelled")) {
+        setError("Connection rejected. Please approve the connection in your wallet.");
+      } else {
+        setError(err?.message || "Failed to connect wallet.");
+      }
+    }
     setLoading(null);
   };
 

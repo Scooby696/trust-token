@@ -98,12 +98,14 @@ export default function PriceAlerts({ holdings = [] }) {
     if (newAlerts.length > 0) {
       setAlerts((prev) => [...newAlerts, ...prev].slice(0, 20));
       // Browser push notification if permitted
-      if (Notification.permission === "granted") {
+      if (typeof Notification !== "undefined" && Notification.permission === "granted") {
         newAlerts.forEach((a) => {
-          new Notification(`${a.symbol} Price Alert`, {
-            body: `${a.symbol} moved ${a.pct > 0 ? "+" : ""}${a.pct.toFixed(2)}% in the last hour (now $${a.price.toFixed(4)})`,
-            icon: "/favicon.ico",
-          });
+          try {
+            new Notification(`${a.symbol} Price Alert`, {
+              body: `${a.symbol} moved ${a.pct > 0 ? "+" : ""}${a.pct.toFixed(2)}% in the last hour (now $${a.price.toFixed(4)})`,
+              icon: "/favicon.ico",
+            });
+          } catch {}
         });
       }
     }
@@ -140,10 +142,12 @@ export default function PriceAlerts({ holdings = [] }) {
   };
 
   const requestNotificationPermission = async () => {
-    if (Notification.permission === "default") {
+    if (typeof Notification !== "undefined" && Notification.permission === "default") {
       await Notification.requestPermission();
     }
   };
+
+  const notifPermission = typeof Notification !== "undefined" ? Notification.permission : "denied";
 
   const removeAlert = (id) => setAlerts((prev) => prev.filter((a) => a.id !== id));
   const clearAll = () => setAlerts([]);
@@ -244,14 +248,14 @@ export default function PriceAlerts({ holdings = [] }) {
                 <div>
                   <p className="font-inter text-xs text-foreground font-semibold">Browser Push Notifications</p>
                   <p className="font-inter text-[10px] text-muted-foreground">
-                    {Notification.permission === "granted"
+                    {notifPermission === "granted"
                       ? "✓ Enabled — you'll get notifications even when away"
-                      : Notification.permission === "denied"
+                      : notifPermission === "denied"
                       ? "✗ Blocked in browser settings"
                       : "Not yet requested"}
                   </p>
                 </div>
-                {Notification.permission !== "granted" && Notification.permission !== "denied" && (
+                {notifPermission !== "granted" && notifPermission !== "denied" && (
                   <button onClick={requestNotificationPermission}
                     className="px-3 py-1.5 bg-card border border-primary/30 text-primary rounded-lg text-xs font-inter hover:bg-primary/10 transition-colors">
                     Enable

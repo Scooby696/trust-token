@@ -67,7 +67,7 @@ export default function TradingTerminal() {
         window.Jupiter.init({
           displayMode: "integrated",
           integratedTargetId: "jupiter-terminal-container",
-          endpoint: "https://solana-mainnet.g.alchemy.com/v2/demo",
+          endpoint: "https://api.mainnet-beta.solana.com",
           formProps: {
             initialInputMint: TOKEN_MINTS[selectedPair.from] || TOKEN_MINTS.SOL,
             initialOutputMint: TOKEN_MINTS[selectedPair.to] || TOKEN_MINTS.USDC,
@@ -90,7 +90,7 @@ export default function TradingTerminal() {
       window.Jupiter.init({
         displayMode: "integrated",
         integratedTargetId: "jupiter-terminal-container",
-        endpoint: "https://solana-mainnet.g.alchemy.com/v2/demo",
+        endpoint: "https://api.mainnet-beta.solana.com",
         formProps: {
           initialInputMint: TOKEN_MINTS[pair.from] || TOKEN_MINTS.SOL,
           initialOutputMint: TOKEN_MINTS[pair.to] || TOKEN_MINTS.USDC,
@@ -136,11 +136,20 @@ export default function TradingTerminal() {
       return;
     }
 
-    const resp = await provider.connect();
+    let resp;
+    try {
+      resp = await provider.connect();
+    } catch (err) {
+      setConnError(err?.code === 4001 || err?.message?.includes("rejected")
+        ? "Connection rejected. Please approve in your wallet."
+        : err?.message || "Failed to connect.");
+      setConnecting(false);
+      return;
+    }
     const address = resp.publicKey.toString();
-    const info = { address, name: walletDef.name, walletName: walletDef.name };
+    const info = { address, walletName: walletDef.name };
     saveWallet(info);
-    setWallet({ address, name: walletDef.name, provider });
+    setWallet({ address, name: walletDef.name, walletName: walletDef.name, provider });
 
     // Pass wallet to Jupiter terminal if loaded
     if (window.Jupiter) {
@@ -157,19 +166,19 @@ export default function TradingTerminal() {
           theme: "dark",
           passthroughWalletContextState: {
             wallet: {
-              adapter: {
-                name: walletDef.name,
-                url: "",
-                icon: "",
-                supportedTransactionVersions: new Set(["legacy", 0]),
-                readyState: "Installed",
-                publicKey: resp.publicKey,
-                connected: true,
-                signTransaction: provider.signTransaction?.bind(provider),
-                signAllTransactions: provider.signAllTransactions?.bind(provider),
-              },
-              readyState: "Installed",
-            },
+                  adapter: {
+                    name: walletDef.name,
+                    url: "",
+                    icon: "",
+                    supportedTransactionVersions: new Set(["legacy", 0]),
+                    readyState: "Installed",
+                    publicKey: resp?.publicKey,
+                    connected: true,
+                    signTransaction: provider.signTransaction?.bind(provider),
+                    signAllTransactions: provider.signAllTransactions?.bind(provider),
+                  },
+                  readyState: "Installed",
+                },
             wallets: [],
             connecting: false,
             connected: true,

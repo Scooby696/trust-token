@@ -32,14 +32,22 @@ export default function WalletConnectHero() {
 
     const provider = w.check();
     if (!provider) {
-      setError(`${w.name} not detected.`);
+      setError(`${w.name} not detected. Install the browser extension first.`);
       setConnecting(false);
       return;
     }
-    const resp = await provider.connect();
-    const info = { address: resp.publicKey.toString(), walletName: w.name };
-    saveWallet(info);
-    setWallet(info);
+    try {
+      const resp = await provider.connect();
+      const info = { address: resp.publicKey.toString(), walletName: w.name };
+      saveWallet(info);
+      setWallet(info);
+    } catch (err) {
+      if (err?.code === 4001 || err?.message?.includes("rejected") || err?.message?.includes("cancelled")) {
+        setError("Connection rejected. Please approve in your wallet.");
+      } else {
+        setError(err?.message || "Failed to connect.");
+      }
+    }
     setConnecting(false);
   };
 
