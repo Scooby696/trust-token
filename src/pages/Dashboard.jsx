@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
 } from "recharts";
-import { Loader2, TrendingUp, TrendingDown, Minus, RefreshCw, BarChart2 } from "lucide-react";
+import { Loader2, TrendingUp, TrendingDown, Minus, RefreshCw, BarChart2, ShieldCheck, CheckCircle2, XCircle, Mail } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const SECTORS = ["DeFi", "NFT", "Layer 1", "Layer 2", "Bitcoin", "Solana", "Regulation", "Institutional"];
@@ -30,6 +30,34 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [lastFetched, setLastFetched] = useState(null);
+  const [applications, setApplications] = useState([]);
+  const [appLoading, setAppLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(null);
+
+  const fetchApplications = async () => {
+    setAppLoading(true);
+    const apps = await base44.entities.CreatorApplication.filter({ status: "submitted" }, "-created_date", 50);
+    setApplications(apps);
+    setAppLoading(false);
+  };
+
+  const handleDecision = async (app, decision) => {
+    setActionLoading(app.id);
+    await base44.entities.CreatorApplication.update(app.id, { status: decision === "approve" ? "approved" : "rejected" });
+    await base44.integrations.Core.SendEmail({
+      to: app.email,
+      subject: decision === "approve"
+        ? `✅ Your application to MADE IN USA DIGITAL has been approved!`
+        : `❌ Your application to MADE IN USA DIGITAL was not approved`,
+      body: decision === "approve"
+        ? `Hi ${app.owner_name},\n\nCongratulations! Your business "${app.business_name}" has been verified and approved for listing on the MADE IN USA DIGITAL Marketplace.\n\nYour listing will be live shortly. Welcome to the community!\n\n— MADE IN USA DIGITAL Team`
+        : `Hi ${app.owner_name},\n\nThank you for applying to list "${app.business_name}" on MADE IN USA DIGITAL. After review, we were unable to approve your application at this time.\n\nPlease contact us at trusttokenbymadeintheusadigital@gmail.com if you have questions or wish to reapply.\n\n— MADE IN USA DIGITAL Team`,
+    });
+    setApplications((prev) => prev.filter((a) => a.id !== app.id));
+    setActionLoading(null);
+  };
+
+  useEffect(() => { fetchApplications(); }, []);
 
   const fetchSentiment = async () => {
     setLoading(true);
@@ -94,6 +122,73 @@ Note: bullish_score + bearish_score + neutral_score should roughly equal 100.`,
 
   return (
     <div className="pt-20 sm:pt-24 min-h-screen">
+
+      {/* Admin: Pending Applications */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="bg-card border border-primary/20 rounded-xl overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-border/30">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <h2 className="font-cinzel font-bold text-foreground">Pending Marketplace Applications</h2>
+              {applications.length > 0 && (
+                <span className="px-2 py-0.5 bg-red-600 text-white rounded-full text-xs font-bold">{applications.length}</span>
+              )}
+            </div>
+            <button onClick={fetchApplications} className="text-muted-foreground hover:text-primary transition-colors">
+              <RefreshCw className="w-4 h-4" />
+            </button>
+          </div>
+
+          {appLoading ? (
+            <div className="flex items-center justify-center py-10 gap-2">
+              <Loader2 className="w-5 h-5 text-primary animate-spin" />
+              <span className="font-inter text-sm text-muted-foreground">Loading applications...</span>
+            </div>
+          ) : applications.length === 0 ? (
+            <div className="text-center py-10">
+              <CheckCircle2 className="w-8 h-8 text-green-400 mx-auto mb-2" />
+              <p className="font-inter text-sm text-muted-foreground">No pending applications — all clear!</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-border/30">
+              {applications.map((app) => (
+                <div key={app.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-start gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="font-cinzel font-bold text-foreground">{app.business_name}</p>
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary border border-primary/30 rounded-full text-[10px] font-inter">{app.category}</span>
+                    </div>
+                    <p className="font-inter text-xs text-muted-foreground mb-0.5">{app.owner_name} · {app.location} · {app.state_of_incorporation}</p>
+                    <p className="font-inter text-xs text-muted-foreground mb-0.5">EIN: {app.ein_number || "—"} · Cert: {app.certification_type || "None"}</p>
+                    <p className="font-inter text-xs text-muted-foreground/70 leading-relaxed line-clamp-2 mt-1">{app.product_description}</p>
+                    <a href={`mailto:${app.email}`} className="flex items-center gap-1 mt-1 font-inter text-xs text-primary hover:underline">
+                      <Mail className="w-3 h-3" />{app.email}
+                    </a>
+                  </div>
+                  <div className="flex gap-2 shrink-0">
+                    <button
+                      onClick={() => handleDecision(app, "approve")}
+                      disabled={actionLoading === app.id}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-green-700 text-white rounded-lg font-cinzel text-xs tracking-wider hover:bg-green-600 transition-colors disabled:opacity-50"
+                    >
+                      {actionLoading === app.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => handleDecision(app, "reject")}
+                      disabled={actionLoading === app.id}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-red-800 text-white rounded-lg font-cinzel text-xs tracking-wider hover:bg-red-700 transition-colors disabled:opacity-50"
+                    >
+                      <XCircle className="w-3.5 h-3.5" /> Reject
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Hero */}
       <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-border/30">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/60 via-background to-purple-950/20 pointer-events-none" />

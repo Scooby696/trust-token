@@ -46,6 +46,34 @@ export default function Apply() {
       kyc_submitted: true,
       id_document_url: form.id_document_url || idVerificationResult?.frontUrl || "",
     });
+
+    // Notify admin
+    await base44.integrations.Core.SendEmail({
+      to: "trusttokenbymadeintheusadigital@gmail.com",
+      subject: `New Marketplace Application: ${form.business_name}`,
+      body: `A new marketplace listing application has been submitted and requires your review.
+
+Business: ${form.business_name}
+Owner: ${form.owner_name}
+Email: ${form.email}
+Location: ${form.location}
+Category: ${form.category}
+EIN: ${form.ein_number}
+State of Incorporation: ${form.state_of_incorporation}
+Certification: ${form.certification_type || "None provided"}
+
+Product Description:
+${form.product_description}
+
+Made in USA Proof:
+${form.made_in_usa_proof}
+
+Please log in to the admin dashboard to approve or reject this application:
+https://app.base44.com/dashboard
+
+— MADE IN USA DIGITAL`,
+    });
+
     setSubmitting(false);
     setSubmittedEmail(form.email);
     setSubmitted(true);
