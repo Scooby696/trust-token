@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
-const KALSHI_BASE = "https://trading.kalshi.com";
+const KALSHI_BASE = "https://kalshi.com";
 const KALSHI_API = "https://trading.kalshi.com/trade-api/v2";
 
 // Hardcoded crypto-relevant Kalshi market slugs / search terms
