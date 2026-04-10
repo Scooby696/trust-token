@@ -53,8 +53,8 @@ function ProbabilityBar({ yes_bid, yes_ask }) {
   );
 }
 
-export default function KalshiPanel() {
-  const [open, setOpen] = useState(false);
+export default function KalshiPanel({ defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState(null);
