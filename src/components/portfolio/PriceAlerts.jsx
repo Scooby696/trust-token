@@ -20,7 +20,6 @@ function saveBaseline(b) {
 }
 
 async function fetchPrices(symbols) {
-  // Use Jupiter price API for Solana tokens
   const TOKEN_IDS = {
     SOL: "So11111111111111111111111111111111111111112",
     USDC: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -31,21 +30,22 @@ async function fetchPrices(symbols) {
     USDT: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
   };
 
-  const ids = symbols
-    .map((s) => TOKEN_IDS[s])
-    .filter(Boolean)
-    .join(",");
-
+  const ids = symbols.map((s) => TOKEN_IDS[s]).filter(Boolean).join(",");
   if (!ids) return {};
 
-  const res = await fetch(`https://price.jup.ag/v4/price?ids=${ids}`);
-  const data = await res.json();
-  const result = {};
-  symbols.forEach((s) => {
-    const id = TOKEN_IDS[s];
-    if (id && data?.data?.[id]) result[s] = data.data[id].price;
-  });
-  return result;
+  try {
+    const res = await fetch(`https://price.jup.ag/v4/price?ids=${ids}`);
+    if (!res.ok) return {};
+    const data = await res.json();
+    const result = {};
+    symbols.forEach((s) => {
+      const id = TOKEN_IDS[s];
+      if (id && data?.data?.[id]) result[s] = data.data[id].price;
+    });
+    return result;
+  } catch {
+    return {};
+  }
 }
 
 export default function PriceAlerts({ holdings = [] }) {
@@ -60,56 +60,56 @@ export default function PriceAlerts({ holdings = [] }) {
 
   const checkPrices = useCallback(async () => {
     if (!settings.enabled || symbols.length === 0) return;
-    const prices = await fetchPrices(symbols);
-    const baseline = baselineRef.current;
-    const newAlerts = [];
-    const now = Date.now();
+    try {
+      const prices = await fetchPrices(symbols);
+      const baseline = baselineRef.current;
+      const newAlerts = [];
+      const now = Date.now();
 
-    Object.entries(prices).forEach(([symbol, price]) => {
-      const base = baseline[symbol];
-      if (!base) {
-        baseline[symbol] = { price, timestamp: now };
-        return;
-      }
-      // Reset baseline if older than 1 hour
-      const age = (now - base.timestamp) / 1000 / 60;
-      if (age > 60) {
-        baseline[symbol] = { price, timestamp: now };
-        return;
-      }
-      const pct = ((price - base.price) / base.price) * 100;
-      if (Math.abs(pct) >= settings.threshold) {
-        newAlerts.push({
-          id: `${symbol}-${now}`,
-          symbol,
-          pct,
-          price,
-          basePrice: base.price,
-          timestamp: now,
-        });
-        // Reset baseline after alert
-        baseline[symbol] = { price, timestamp: now };
-      }
-    });
+      Object.entries(prices).forEach(([symbol, price]) => {
+        const base = baseline[symbol];
+        if (!base) {
+          baseline[symbol] = { price, timestamp: now };
+          return;
+        }
+        const age = (now - base.timestamp) / 1000 / 60;
+        if (age > 60) {
+          baseline[symbol] = { price, timestamp: now };
+          return;
+        }
+        const pct = ((price - base.price) / base.price) * 100;
+        if (Math.abs(pct) >= settings.threshold) {
+          newAlerts.push({
+            id: `${symbol}-${now}`,
+            symbol,
+            pct,
+            price,
+            basePrice: base.price,
+            timestamp: now,
+          });
+          baseline[symbol] = { price, timestamp: now };
+        }
+      });
 
-    saveBaseline(baseline);
-    baselineRef.current = baseline;
+      saveBaseline(baseline);
+      baselineRef.current = baseline;
 
-    if (newAlerts.length > 0) {
-      setAlerts((prev) => [...newAlerts, ...prev].slice(0, 20));
-      // Browser push notification if permitted
-      if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-        newAlerts.forEach((a) => {
-          try {
-            new Notification(`${a.symbol} Price Alert`, {
-              body: `${a.symbol} moved ${a.pct > 0 ? "+" : ""}${a.pct.toFixed(2)}% in the last hour (now $${a.price.toFixed(4)})`,
-              icon: "/favicon.ico",
-            });
-          } catch {}
-        });
+      if (newAlerts.length > 0) {
+        setAlerts((prev) => [...newAlerts, ...prev].slice(0, 20));
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+          newAlerts.forEach((a) => {
+            try {
+              new Notification(`${a.symbol} Price Alert`, {
+                body: `${a.symbol} moved ${a.pct > 0 ? "+" : ""}${a.pct.toFixed(2)}% (now $${a.price.toFixed(4)})`,
+                icon: "/favicon.ico",
+              });
+            } catch {}
+          });
+        }
       }
-    }
+    } catch {}
   }, [settings, symbols.join(",")]);
+
 
   // Initialize baseline on holdings load
   useEffect(() => {

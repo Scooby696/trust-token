@@ -88,51 +88,35 @@ export default function RebalancingTool({ holdings = [] }) {
       .map(([n, v]) => `${n}: ${v}%`)
       .join(", ");
 
-    const result = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a crypto portfolio rebalancing expert for Solana wallets.
-
-Current Portfolio (total: $${totalValue.toFixed(2)}):
-${holdingSummary}
-
-Target Risk Profile: ${selectedProfile}
-Target Allocation: ${targetSummary}
-
-Analyze the gap between current and target allocations. Provide:
-1. summary: 2-3 sentence assessment of how far the portfolio is from the target profile
-2. swaps: array of up to 5 specific swap recommendations, each with:
-   - from_symbol: token to sell (exact symbol from holdings)
-   - to_symbol: target token to buy (e.g. SOL, USDC, JUP, BONK, RAY)
-   - usd_amount: dollar amount to swap (number)
-   - rationale: one sentence why this swap moves toward the target
-   - priority: "high" | "medium" | "low"
-3. after_rebalance: brief description of what the portfolio looks like after all swaps
-4. drift_score: 0-100 how far current allocation is from target (0=perfect match)
-
-Only suggest swaps for tokens actually in the portfolio. If already well-aligned, say so and return empty swaps array.`,
-      response_json_schema: {
-        type: "object",
-        properties: {
-          summary: { type: "string" },
-          drift_score: { type: "number" },
-          swaps: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                from_symbol: { type: "string" },
-                to_symbol: { type: "string" },
-                usd_amount: { type: "number" },
-                rationale: { type: "string" },
-                priority: { type: "string" },
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are a crypto portfolio rebalancing expert for Solana wallets.\n\nCurrent Portfolio (total: $${totalValue.toFixed(2)}):\n${holdingSummary}\n\nTarget Risk Profile: ${selectedProfile}\nTarget Allocation: ${targetSummary}\n\nAnalyze the gap between current and target allocations. Provide:\n1. summary: 2-3 sentence assessment of how far the portfolio is from the target profile\n2. swaps: array of up to 5 specific swap recommendations, each with:\n   - from_symbol: token to sell (exact symbol from holdings)\n   - to_symbol: target token to buy (e.g. SOL, USDC, JUP, BONK, RAY)\n   - usd_amount: dollar amount to swap (number)\n   - rationale: one sentence why this swap moves toward the target\n   - priority: "high" | "medium" | "low"\n3. after_rebalance: brief description of what the portfolio looks like after all swaps\n4. drift_score: 0-100 how far current allocation is from target (0=perfect match)\n\nOnly suggest swaps for tokens actually in the portfolio. If already well-aligned, say so and return empty swaps array.`,
+        response_json_schema: {
+          type: "object",
+          properties: {
+            summary: { type: "string" },
+            drift_score: { type: "number" },
+            swaps: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  from_symbol: { type: "string" },
+                  to_symbol: { type: "string" },
+                  usd_amount: { type: "number" },
+                  rationale: { type: "string" },
+                  priority: { type: "string" },
+                }
               }
-            }
-          },
-          after_rebalance: { type: "string" },
+            },
+            after_rebalance: { type: "string" },
+          }
         }
-      }
-    });
-
-    setAnalysis(result);
+      });
+      setAnalysis(result);
+    } catch {
+      setAnalysis({ summary: "Analysis failed. Please try again.", drift_score: 0, swaps: [], after_rebalance: "" });
+    }
     setLoading(false);
   };
 

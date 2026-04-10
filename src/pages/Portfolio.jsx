@@ -244,14 +244,21 @@ export default function Portfolio() {
     saveWallet(walletInfo);
     setError("");
     setLoadingHoldings(true);
-    const h = await fetchWalletHoldings(walletInfo.address);
+    let h = [];
+    try {
+      h = await fetchWalletHoldings(walletInfo.address);
+    } catch (err) {
+      setError("Failed to load wallet holdings. Please check the address and try again.");
+    }
     setHoldings(h);
     setLoadingHoldings(false);
 
     if (h.length > 0) {
       setLoadingRating(true);
-      const rating = await generatePortfolioRating(h);
-      setPortfolioRating(rating);
+      try {
+        const rating = await generatePortfolioRating(h);
+        setPortfolioRating(rating);
+      } catch {}
       setLoadingRating(false);
     }
   };
@@ -352,6 +359,18 @@ export default function Portfolio() {
               className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-xl font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
             >
               <Wallet className="w-4 h-4" /> Connect Wallet to Get Started
+            </button>
+          </motion.div>
+        ) : error ? (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-24">
+            <div className="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle className="w-8 h-8 text-red-400" />
+            </div>
+            <h2 className="font-cinzel text-xl font-bold text-foreground mb-2">Failed to Load Holdings</h2>
+            <p className="font-inter text-sm text-muted-foreground mb-6 max-w-md mx-auto">{error}</p>
+            <button onClick={() => handleConnect(wallet)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors">
+              <RefreshCw className="w-4 h-4" /> Try Again
             </button>
           </motion.div>
         ) : loadingHoldings ? (
