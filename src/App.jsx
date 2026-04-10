@@ -22,6 +22,7 @@ import Shop from './pages/Shop';
 import Roadmap from './pages/Roadmap';
 import Dashboard from './pages/Dashboard';
 import BusinessDetail from './pages/BusinessDetail';
+import Portfolio from './pages/Portfolio';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -61,6 +62,7 @@ const AuthenticatedApp = () => {
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/business" element={<BusinessDetail />} />
+        <Route path="/portfolio" element={<Portfolio />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
