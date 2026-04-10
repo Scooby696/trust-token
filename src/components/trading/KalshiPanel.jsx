@@ -278,7 +278,7 @@ Based on these prediction market probabilities:
                         <p className="font-inter text-xs text-foreground group-hover:text-primary transition-colors leading-snug mb-1.5 line-clamp-2">
                           {m.title || m.subtitle || m.ticker}
                         </p>
-                        <ProbabilityBar yes_bid={m.yes_bid} yes_ask={m.yes_ask} />
+                        <ProbabilityBar yes_bid={m.yes_bid} />
                         {m.volume != null && (
                           <p className="font-inter text-[10px] text-muted-foreground/60 mt-1">
                             Vol: {m.volume?.toLocaleString() || "—"} · Closes {m.close_time ? new Date(m.close_time).toLocaleDateString() : "—"}

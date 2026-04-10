@@ -25,7 +25,8 @@ async function fetchPriceHistory(coingeckoId, days) {
   const res = await fetch(
     `https://api.coingecko.com/api/v3/coins/${coingeckoId}/market_chart?vs_currency=usd&days=${days}&interval=daily`
   );
-  if (!res.ok) throw new Error("Price fetch failed");
+  if (res.status === 429) throw new Error("CoinGecko rate limit reached. Please wait 60 seconds and try again.");
+  if (!res.ok) throw new Error("Price data unavailable. Please try again shortly.");
   const data = await res.json();
   return (data.prices || []).map(([ts, price]) => ({
     date: new Date(ts).toISOString().split("T")[0],

@@ -34,7 +34,7 @@ async function fetchPrices(symbols) {
   if (!ids) return {};
 
   try {
-    const res = await fetch(`https://price.jup.ag/v4/price?ids=${ids}`);
+    const res = await fetch(`https://price.jup.ag/v6/price?ids=${ids}`);
     if (!res.ok) return {};
     const data = await res.json();
     const result = {};

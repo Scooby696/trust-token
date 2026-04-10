@@ -36,23 +36,6 @@ const RISK_BY_NARRATIVE = {
 };
 
 async function fetchWalletHoldings(address) {
-  // Fetch token accounts from Solana mainnet via Helius public API
-  const res = await fetch(`https://mainnet.helius-rpc.com/?api-key=demo`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: 1,
-      method: "getTokenAccountsByOwner",
-      params: [
-        address,
-        { programId: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
-        { encoding: "jsonParsed" }
-      ]
-    })
-  });
-
-  // Fallback: fetch from DexScreener + CoinGecko for SOL native balance + token list
   // Use public Solana RPC for SOL balance
   const solRes = await fetch("https://api.mainnet-beta.solana.com", {
     method: "POST",
@@ -132,7 +115,7 @@ async function fetchWalletHoldings(address) {
       // Get prices from Jupiter
       let prices = {};
       try {
-        const pricesRes = await fetch(`https://price.jup.ag/v4/price?ids=${mintAddresses.join(",")}`);
+        const pricesRes = await fetch(`https://price.jup.ag/v6/price?ids=${mintAddresses.join(",")}`);
         const pricesData = await pricesRes.json();
         prices = pricesData?.data || {};
       } catch {}
