@@ -457,8 +457,8 @@ export default function Home() {
           </a>
           <p className="font-inter text-sm text-muted-foreground">
             Questions? Contact us at{" "}
-            <a href="mailto:madeintheusadigital@gmail.com" className="text-primary hover:text-primary/80 transition-colors">
-              madeintheusadigital@gmail.com
+            <a href="mailto:trusttokenbymadeinusadigital@gmail.com" className="text-primary hover:text-primary/80 transition-colors">
+              trusttokenbymadeinusadigital@gmail.com
             </a>
           </p>
         </motion.div>

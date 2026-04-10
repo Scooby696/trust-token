@@ -98,7 +98,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://x.com/MITUSADIGITAL"
+              href="https://x.com/trust_tokenusa"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -118,8 +118,8 @@ export default function Footer() {
           </div>
 
           <div className="text-center md:text-right">
-            <a href="mailto:madeintheusadigital@gmail.com" className="font-inter text-xs text-muted-foreground hover:text-primary transition-colors">
-              madeintheusadigital@gmail.com
+            <a href="mailto:trusttokenbymadeinusadigital@gmail.com" className="font-inter text-xs text-muted-foreground hover:text-primary transition-colors">
+              trusttokenbymadeinusadigital@gmail.com
             </a>
             <p className="font-inter text-xs text-muted-foreground mt-1">
               © {new Date().getFullYear()} MADEINUSA DIGITAL
