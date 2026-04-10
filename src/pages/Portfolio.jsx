@@ -6,6 +6,7 @@ import WalletConnectModal from "../components/portfolio/WalletConnectModal";
 import HoldingsGrid from "../components/portfolio/HoldingsGrid";
 import AIResearchPanel from "../components/portfolio/AIResearchPanel";
 import { loadWallet, saveWallet, clearWallet } from "../lib/walletStore";
+import PriceAlerts from "../components/portfolio/PriceAlerts";
 
 // Narrative classification by known tokens
 const NARRATIVE_MAP = {
@@ -425,6 +426,9 @@ export default function Portfolio() {
                 )}
               </motion.div>
             ) : null}
+
+            {/* Price Alerts */}
+            <PriceAlerts holdings={holdings} />
 
             {/* Holdings */}
             <div>
