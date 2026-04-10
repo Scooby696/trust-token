@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Target, ExternalLink, Shield, TrendingUp, BarChart2, Zap } from "lucide-react";
 import KalshiPanel from "../components/trading/KalshiPanel";
+import PredictionAccuracyChart from "../components/trading/PredictionAccuracyChart";
 
 const KALSHI_CATEGORIES = [
   { label: "Bitcoin Markets", url: "https://trading.kalshi.com/markets/bitcoin", color: "text-orange-400", desc: "BTC price level & ETF markets" },
@@ -108,6 +109,17 @@ export default function PredictionMarkets() {
             Load live Kalshi crypto markets below, then click <strong className="text-foreground">Generate AI Trading Signal</strong> to get an AI-driven interpretation of what the prediction markets are telling you.
           </p>
           <KalshiPanel defaultOpen />
+        </div>
+
+        {/* Accuracy Visualizer */}
+        <div>
+          <h2 className="font-cinzel text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+            <BarChart2 className="w-5 h-5 text-primary" /> Historical Accuracy Visualizer
+          </h2>
+          <p className="font-inter text-sm text-muted-foreground mb-4">
+            See how past Kalshi crypto market resolutions lined up with actual price movements — and let AI score the accuracy.
+          </p>
+          <PredictionAccuracyChart />
         </div>
 
         {/* Browse by category */}
