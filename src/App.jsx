@@ -23,6 +23,7 @@ import Roadmap from './pages/Roadmap';
 import Dashboard from './pages/Dashboard';
 import BusinessDetail from './pages/BusinessDetail';
 import Portfolio from './pages/Portfolio';
+import TradingTerminal from './pages/TradingTerminal';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -63,6 +64,7 @@ const AuthenticatedApp = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/business" element={<BusinessDetail />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/terminal" element={<TradingTerminal />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
