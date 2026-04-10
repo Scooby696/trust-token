@@ -22,41 +22,28 @@ export default function AIResearchPanel({ token, onClose }) {
 
   const runInitialAnalysis = async () => {
     setLoadingInitial(true);
-    const result = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are a crypto risk analyst specializing in Solana ecosystem tokens.
-
-Analyze the following token in depth:
-- Token Symbol: ${token.symbol}
-- Token Name: ${token.name}
-- Current holding: ${token.amount} tokens (~$${token.usdValue?.toFixed(2) || "unknown"} USD value)
-- 24h Price Change: ${token.change24h !== undefined ? token.change24h + "%" : "unknown"}
-- Narrative: ${token.narrative || "unknown"}
-
-Provide:
-1. risk_score: 0-100 (100 = most risky)
-2. risk_level: "low" | "medium" | "high" | "extreme"
-3. project_summary: 2-3 sentences describing the project
-4. bull_case: 2-3 bullet points on why it could succeed
-5. bear_case: 2-3 bullet points on risks/why it could fail
-6. recommendation: one of "strong_hold" | "hold" | "caution" | "reduce" | "avoid"
-7. recommendation_reason: one sentence
-8. key_risks: array of 3-5 specific risk strings`,
-      add_context_from_internet: true,
-      response_json_schema: {
-        type: "object",
-        properties: {
-          risk_score: { type: "number" },
-          risk_level: { type: "string" },
-          project_summary: { type: "string" },
-          bull_case: { type: "array", items: { type: "string" } },
-          bear_case: { type: "array", items: { type: "string" } },
-          recommendation: { type: "string" },
-          recommendation_reason: { type: "string" },
-          key_risks: { type: "array", items: { type: "string" } },
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are a crypto risk analyst specializing in Solana ecosystem tokens.\n\nAnalyze the following token in depth:\n- Token Symbol: ${token.symbol}\n- Token Name: ${token.name}\n- Current holding: ${token.amount} tokens (~$${token.usdValue?.toFixed(2) || "unknown"} USD value)\n- 24h Price Change: ${token.change24h !== undefined ? token.change24h + "%" : "unknown"}\n- Narrative: ${token.narrative || "unknown"}\n\nProvide:\n1. risk_score: 0-100 (100 = most risky)\n2. risk_level: "low" | "medium" | "high" | "extreme"\n3. project_summary: 2-3 sentences describing the project\n4. bull_case: 2-3 bullet points on why it could succeed\n5. bear_case: 2-3 bullet points on risks/why it could fail\n6. recommendation: one of "strong_hold" | "hold" | "caution" | "reduce" | "avoid"\n7. recommendation_reason: one sentence\n8. key_risks: array of 3-5 specific risk strings`,
+        add_context_from_internet: true,
+        response_json_schema: {
+          type: "object",
+          properties: {
+            risk_score: { type: "number" },
+            risk_level: { type: "string" },
+            project_summary: { type: "string" },
+            bull_case: { type: "array", items: { type: "string" } },
+            bear_case: { type: "array", items: { type: "string" } },
+            recommendation: { type: "string" },
+            recommendation_reason: { type: "string" },
+            key_risks: { type: "array", items: { type: "string" } },
+          }
         }
-      }
-    });
-    setInitialAnalysis(result);
+      });
+      setInitialAnalysis(result);
+    } catch {
+      setInitialAnalysis({ risk_score: 50, risk_level: "medium", project_summary: "Analysis unavailable. Please try again.", bull_case: [], bear_case: [], recommendation: "hold", recommendation_reason: "Could not retrieve analysis.", key_risks: [] });
+    }
     setLoadingInitial(false);
   };
 
@@ -72,18 +59,15 @@ Provide:
 
     const history = newMessages.map((m) => `${m.role === "user" ? "User" : "AI"}: ${m.content}`).join("\n");
 
-    const reply = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are an expert crypto risk analyst. The user is asking about ${token.symbol} (${token.name}).
-They hold ${token.amount} tokens worth ~$${token.usdValue?.toFixed(2) || "unknown"}.
-
-Conversation so far:
-${history}
-
-Answer the user's latest question with actionable, honest analysis. Be concise but thorough. Use markdown formatting.`,
-      add_context_from_internet: true,
-    });
-
-    setMessages([...newMessages, { role: "ai", content: reply }]);
+    try {
+      const reply = await base44.integrations.Core.InvokeLLM({
+        prompt: `You are an expert crypto risk analyst. The user is asking about ${token.symbol} (${token.name}).\nThey hold ${token.amount} tokens worth ~$${token.usdValue?.toFixed(2) || "unknown"}.\n\nConversation so far:\n${history}\n\nAnswer the user's latest question with actionable, honest analysis. Be concise but thorough. Use markdown formatting.`,
+        add_context_from_internet: true,
+      });
+      setMessages([...newMessages, { role: "ai", content: reply }]);
+    } catch {
+      setMessages([...newMessages, { role: "ai", content: "Sorry, I couldn't retrieve an answer right now. Please try again." }]);
+    }
     setLoading(false);
   };
 

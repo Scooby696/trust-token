@@ -43,18 +43,23 @@ export default function Dashboard() {
 
   const handleDecision = async (app, decision) => {
     setActionLoading(app.id);
-    await base44.entities.CreatorApplication.update(app.id, { status: decision === "approve" ? "approved" : "rejected" });
-    await base44.integrations.Core.SendEmail({
-      to: app.email,
-      subject: decision === "approve"
-        ? `✅ Your application to MADE IN USA DIGITAL has been approved!`
-        : `❌ Your application to MADE IN USA DIGITAL was not approved`,
-      body: decision === "approve"
-        ? `Hi ${app.owner_name},\n\nCongratulations! Your business "${app.business_name}" has been verified and approved for listing on the MADE IN USA DIGITAL Marketplace.\n\nYour listing will be live shortly. Welcome to the community!\n\n— MADE IN USA DIGITAL Team`
-        : `Hi ${app.owner_name},\n\nThank you for applying to list "${app.business_name}" on MADE IN USA DIGITAL. After review, we were unable to approve your application at this time.\n\nPlease contact us at trusttokenbymadeintheusadigital@gmail.com if you have questions or wish to reapply.\n\n— MADE IN USA DIGITAL Team`,
-    });
-    setApplications((prev) => prev.filter((a) => a.id !== app.id));
-    setActionLoading(null);
+    try {
+      await base44.entities.CreatorApplication.update(app.id, { status: decision === "approve" ? "approved" : "rejected" });
+      try {
+        await base44.integrations.Core.SendEmail({
+          to: app.email,
+          subject: decision === "approve"
+            ? `✅ Your application to MADE IN USA DIGITAL has been approved!`
+            : `❌ Your application to MADE IN USA DIGITAL was not approved`,
+          body: decision === "approve"
+            ? `Hi ${app.owner_name},\n\nCongratulations! Your business "${app.business_name}" has been verified and approved for listing on the MADE IN USA DIGITAL Marketplace.\n\nYour listing will be live shortly. Welcome to the community!\n\n— MADE IN USA DIGITAL Team`
+            : `Hi ${app.owner_name},\n\nThank you for applying to list "${app.business_name}" on MADE IN USA DIGITAL. After review, we were unable to approve your application at this time.\n\nPlease contact us at trusttokenbymadeintheusadigital@gmail.com if you have questions or wish to reapply.\n\n— MADE IN USA DIGITAL Team`,
+        });
+      } catch {}
+      setApplications((prev) => prev.filter((a) => a.id !== app.id));
+    } finally {
+      setActionLoading(null);
+    }
   };
 
   useEffect(() => { fetchApplications(); }, []);

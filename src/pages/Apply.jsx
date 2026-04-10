@@ -47,32 +47,14 @@ export default function Apply() {
       id_document_url: form.id_document_url || idVerificationResult?.frontUrl || "",
     });
 
-    // Notify admin
-    await base44.integrations.Core.SendEmail({
-      to: "trusttokenbymadeintheusadigital@gmail.com",
-      subject: `New Marketplace Application: ${form.business_name}`,
-      body: `A new marketplace listing application has been submitted and requires your review.
-
-Business: ${form.business_name}
-Owner: ${form.owner_name}
-Email: ${form.email}
-Location: ${form.location}
-Category: ${form.category}
-EIN: ${form.ein_number}
-State of Incorporation: ${form.state_of_incorporation}
-Certification: ${form.certification_type || "None provided"}
-
-Product Description:
-${form.product_description}
-
-Made in USA Proof:
-${form.made_in_usa_proof}
-
-Please log in to the admin dashboard to approve or reject this application:
-https://app.base44.com/dashboard
-
-— MADE IN USA DIGITAL`,
-    });
+    // Notify admin (non-blocking)
+    try {
+      await base44.integrations.Core.SendEmail({
+        to: "trusttokenbymadeintheusadigital@gmail.com",
+        subject: `New Marketplace Application: ${form.business_name}`,
+        body: `A new marketplace listing application has been submitted and requires your review.\n\nBusiness: ${form.business_name}\nOwner: ${form.owner_name}\nEmail: ${form.email}\nLocation: ${form.location}\nCategory: ${form.category}\nEIN: ${form.ein_number}\nState of Incorporation: ${form.state_of_incorporation}\nCertification: ${form.certification_type || "None provided"}\n\nProduct Description:\n${form.product_description}\n\nMade in USA Proof:\n${form.made_in_usa_proof}\n\n— MADE IN USA DIGITAL`,
+      });
+    } catch {}
 
     setSubmitting(false);
     setSubmittedEmail(form.email);
