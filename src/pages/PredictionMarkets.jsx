@@ -13,6 +13,15 @@ const KALSHI_CATEGORIES = [
   { label: "Finance Markets", url: "https://kalshi.com/browse?q=finance", color: "text-cyan-300", desc: "Stocks, indices & financial events" },
 ];
 
+const POLYMARKET_CATEGORIES = [
+  { label: "Bitcoin Markets", url: "https://polymarket.com/markets/crypto/bitcoin", color: "text-orange-400", desc: "BTC price & ETF prediction markets" },
+  { label: "Ethereum Markets", url: "https://polymarket.com/markets/crypto/ethereum", color: "text-blue-300", desc: "ETH price & upgrade markets" },
+  { label: "All Crypto Markets", url: "https://polymarket.com/markets/crypto", color: "text-primary", desc: "Full crypto prediction board" },
+  { label: "Politics", url: "https://polymarket.com/markets/politics", color: "text-red-400", desc: "Political outcomes & elections" },
+  { label: "Economics", url: "https://polymarket.com/markets/economics", color: "text-green-400", desc: "Macro & economic events" },
+  { label: "Science & Tech", url: "https://polymarket.com/markets/science", color: "text-cyan-300", desc: "Tech, AI & science outcomes" },
+];
+
 const HOW_IT_WORKS = [
   { icon: Target, title: "Markets Open", desc: "Kalshi lists regulated binary questions — e.g. 'Will BTC close above $100k this month?'" },
   { icon: TrendingUp, title: "Price = Probability", desc: "Each contract trades 0–100¢. A price of 65¢ means the market thinks there's a 65% chance of YES." },
@@ -124,18 +133,48 @@ export default function PredictionMarkets() {
 
         {/* Browse by category */}
         <div>
-          <h2 className="font-cinzel text-xl font-bold text-foreground mb-4">Browse Kalshi Markets</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {KALSHI_CATEGORIES.map(({ label, url, color, desc }) => (
-              <a key={label} href={url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-between p-4 bg-card border border-border/50 rounded-xl hover:border-primary/40 transition-all group">
-                <div>
-                  <p className={`font-cinzel text-sm font-bold ${color} group-hover:underline`}>{label}</p>
-                  <p className="font-inter text-xs text-muted-foreground mt-0.5">{desc}</p>
-                </div>
-                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-              </a>
-            ))}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-cinzel text-xl font-bold text-foreground">Browse Prediction Markets</h2>
+          </div>
+
+          {/* Kalshi */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-cinzel text-sm font-bold text-primary">🇺🇸 Kalshi</span>
+              <span className="px-2 py-0.5 bg-green-900/20 border border-green-700/30 text-green-400 text-[10px] font-inter rounded-full">CFTC-Regulated</span>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {KALSHI_CATEGORIES.map(({ label, url, color, desc }) => (
+                <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 bg-card border border-border/50 rounded-xl hover:border-primary/40 transition-all group">
+                  <div>
+                    <p className={`font-cinzel text-sm font-bold ${color} group-hover:underline`}>{label}</p>
+                    <p className="font-inter text-xs text-muted-foreground mt-0.5">{desc}</p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Polymarket */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-cinzel text-sm font-bold text-blue-300">🌐 Polymarket</span>
+              <span className="px-2 py-0.5 bg-blue-900/20 border border-blue-700/30 text-blue-300 text-[10px] font-inter rounded-full">Global · Crypto-Powered</span>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {POLYMARKET_CATEGORIES.map(({ label, url, color, desc }) => (
+                <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 bg-card border border-border/50 rounded-xl hover:border-blue-500/40 transition-all group">
+                  <div>
+                    <p className={`font-cinzel text-sm font-bold ${color} group-hover:underline`}>{label}</p>
+                    <p className="font-inter text-xs text-muted-foreground mt-0.5">{desc}</p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-blue-400 transition-colors shrink-0" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

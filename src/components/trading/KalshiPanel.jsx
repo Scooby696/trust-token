@@ -21,6 +21,7 @@ export default function KalshiPanel({ defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
+  const [activeMarket, setActiveMarket] = useState("kalshi"); // "kalshi" | "polymarket"
 
   const SENTIMENT_ICON = {
     "Bullish": <TrendingUp className="w-4 h-4 text-green-400" />,
@@ -89,7 +90,32 @@ export default function KalshiPanel({ defaultOpen = false }) {
             className="overflow-hidden"
           >
             <div className="border-t border-border/30 p-4 space-y-4">
+              {/* Market selector */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setActiveMarket("kalshi")}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-cinzel tracking-wider border transition-colors ${
+                    activeMarket === "kalshi"
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background border-border text-muted-foreground hover:border-primary/40"
+                  }`}
+                >
+                  🇺🇸 Kalshi
+                </button>
+                <button
+                  onClick={() => setActiveMarket("polymarket")}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-cinzel tracking-wider border transition-colors ${
+                    activeMarket === "polymarket"
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background border-border text-muted-foreground hover:border-primary/40"
+                  }`}
+                >
+                  🌐 Polymarket
+                </button>
+              </div>
+
               {/* Kalshi direct links */}
+              {activeMarket === "kalshi" && (
               <div className="flex flex-wrap gap-2">
                 <a href="https://kalshi.com/browse?q=bitcoin" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
@@ -104,6 +130,25 @@ export default function KalshiPanel({ defaultOpen = false }) {
                   <ExternalLink className="w-3 h-3" /> All Crypto
                 </a>
               </div>
+              )}
+
+              {/* Polymarket direct links */}
+              {activeMarket === "polymarket" && (
+              <div className="flex flex-wrap gap-2">
+                <a href="https://polymarket.com/markets/crypto/bitcoin" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+                  <ExternalLink className="w-3 h-3" /> Bitcoin
+                </a>
+                <a href="https://polymarket.com/markets/crypto/ethereum" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+                  <ExternalLink className="w-3 h-3" /> Ethereum
+                </a>
+                <a href="https://polymarket.com/markets/crypto" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+                  <ExternalLink className="w-3 h-3" /> All Crypto
+                </a>
+              </div>
+              )}
 
               {/* AI Analysis */}
               <button
