@@ -484,6 +484,47 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* KYDSOLID Launchpad Promo */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-border/30">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="relative rounded-2xl overflow-hidden border border-primary/30 bg-gradient-to-br from-primary/10 via-card to-blue-950/60 p-8 sm:p-12 text-center">
+            <div className="absolute top-0 left-0 right-0 h-1 flex">
+              <div className="flex-1 bg-red-600" />
+              <div className="flex-1 bg-white/80" />
+              <div className="flex-1 bg-blue-700" />
+            </div>
+            <div className="flex items-center justify-center mb-4">
+              <div className="flex items-center gap-2 px-4 py-1.5 bg-primary/20 border border-primary/50 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span className="font-cinzel text-xs font-bold text-primary tracking-[0.25em] uppercase">Coming Soon</span>
+              </div>
+            </div>
+            <p className="font-inter text-xs tracking-[0.35em] text-primary uppercase mb-3">MADE IN USA DIGITAL · New Project</p>
+            <h2 className="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-3 leading-tight">
+              KYDSOLID <span className="text-primary">(SOLID)</span>
+            </h2>
+            <div className="w-24 h-0.5 bg-primary mx-auto mb-5" />
+            <p className="font-inter text-sm sm:text-base text-white/65 max-w-xl mx-auto leading-relaxed mb-8">
+              The next launchpad from MADE IN USA DIGITAL is almost here. Preview the KYDSOLID platform and be first in line when it launches.
+            </p>
+            <a
+              href="https://kydsolidbymadeintheusadigital.base44.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-8 py-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              <span className="w-2 h-2 rounded-full bg-primary-foreground animate-ping inline-block"></span>
+              Preview KYDSOLID Launchpad →
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
       <WalletConnectHero />
 
       <LatestUpdates />
