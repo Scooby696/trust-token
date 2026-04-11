@@ -7,6 +7,7 @@ import {
 import { base44 } from "@/api/base44Client";
 
 const KALSHI_BASE = "https://kalshi.com";
+const KALSHI_MARKETS_BASE = "https://kalshi.com/markets";
 
 const SIGNAL_STYLE = {
   "Strong Buy": "text-green-400 bg-green-900/20 border-green-700/40",
@@ -90,17 +91,21 @@ export default function KalshiPanel({ defaultOpen = false }) {
             <div className="border-t border-border/30 p-4 space-y-4">
               {/* Kalshi direct links */}
               <div className="flex flex-wrap gap-2">
-                <a href={`${KALSHI_BASE}/markets/KXBTCD`} target="_blank" rel="noopener noreferrer"
+                <a href={`${KALSHI_MARKETS_BASE}?category=crypto`} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-                  <ExternalLink className="w-3 h-3" /> Bitcoin Markets
+                  <ExternalLink className="w-3 h-3" /> Crypto Markets
                 </a>
-                <a href={`${KALSHI_BASE}/markets/KXETH`} target="_blank" rel="noopener noreferrer"
+                <a href="https://kalshi.com/markets/KXBTCD" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-                  <ExternalLink className="w-3 h-3" /> Ethereum Markets
+                  <ExternalLink className="w-3 h-3" /> Bitcoin
                 </a>
-                <a href={`${KALSHI_BASE}/browse?q=crypto`} target="_blank" rel="noopener noreferrer"
+                <a href="https://kalshi.com/markets/KXETH" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-                  <ExternalLink className="w-3 h-3" /> All Crypto
+                  <ExternalLink className="w-3 h-3" /> Ethereum
+                </a>
+                <a href="https://kalshi.com/markets/KXSOL" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+                  <ExternalLink className="w-3 h-3" /> Solana
                 </a>
               </div>
 
@@ -165,7 +170,7 @@ export default function KalshiPanel({ defaultOpen = false }) {
                 </p>
                 <a href="https://kalshi.com" target="_blank" rel="noopener noreferrer"
                   className="font-inter text-[10px] text-primary hover:underline flex items-center gap-1 mt-1">
-                  About Kalshi <ExternalLink className="w-3 h-3" />
+                  kalshi.com <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </div>
