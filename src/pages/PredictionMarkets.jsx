@@ -62,6 +62,10 @@ export default function PredictionMarkets() {
                 className="flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-xl font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                 <ExternalLink className="w-4 h-4" /> Open Kalshi Markets
               </a>
+              <a href="https://polymarket.com" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 bg-blue-700 text-white rounded-xl font-cinzel text-sm tracking-wider hover:bg-blue-600 transition-colors shadow-lg shadow-blue-700/20">
+                <ExternalLink className="w-4 h-4" /> Open Polymarket
+              </a>
               <a href="https://kalshi.com" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-3 bg-card border border-border text-muted-foreground rounded-xl font-cinzel text-sm tracking-wider hover:border-primary/40 hover:text-primary transition-colors">
                 Learn How It Works
