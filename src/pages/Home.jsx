@@ -176,8 +176,8 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-16">
           
-          <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
-            Words of Wisdom
+          <p className="text-primary mb-3 text-4xl font-inter uppercase tracking-[0.3em]">WORDS OF WISDOM
+
           </p>
           
 
