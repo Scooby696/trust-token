@@ -179,9 +179,9 @@ export default function Home() {
           <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
             Words of Wisdom
           </p>
-          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-foreground">
-            From Our Founding Fathers
-          </h2>
+          
+
+          
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -196,12 +196,12 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mt-12">
           
-          <Link
-            to="/quotes"
-            className="inline-flex items-center gap-2 font-inter text-sm text-primary hover:text-primary/80 tracking-wider transition-colors">
-            
-            View All Quotes <ArrowRight className="w-4 h-4" />
-          </Link>
+          
+
+
+
+
+          
         </motion.div>
       </section>
 
