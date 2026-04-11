@@ -5,12 +5,12 @@ import KalshiPanel from "../components/trading/KalshiPanel";
 import PredictionAccuracyChart from "../components/trading/PredictionAccuracyChart";
 
 const KALSHI_CATEGORIES = [
-  { label: "Bitcoin Markets", url: "https://trading.kalshi.com/markets/bitcoin", color: "text-orange-400", desc: "BTC price level & ETF markets" },
-  { label: "Ethereum Markets", url: "https://trading.kalshi.com/markets/ethereum", color: "text-blue-300", desc: "ETH price & upgrade markets" },
-  { label: "All Crypto Markets", url: "https://trading.kalshi.com/markets/crypto", color: "text-primary", desc: "Full crypto prediction board" },
-  { label: "Fed & Economics", url: "https://trading.kalshi.com/markets/fed", color: "text-green-400", desc: "Fed rate & macro events" },
-  { label: "Politics & Policy", url: "https://trading.kalshi.com/markets/politics", color: "text-red-400", desc: "Policy decisions affecting crypto" },
-  { label: "Finance Markets", url: "https://trading.kalshi.com/markets/finance", color: "text-cyan-300", desc: "Stocks, indices & financial events" },
+  { label: "Bitcoin Markets", url: "https://kalshi.com/markets/kxbtcd", color: "text-orange-400", desc: "BTC price level & ETF markets" },
+  { label: "Ethereum Markets", url: "https://kalshi.com/markets/kxeth", color: "text-blue-300", desc: "ETH price & upgrade markets" },
+  { label: "All Crypto Markets", url: "https://kalshi.com/browse?q=crypto", color: "text-primary", desc: "Full crypto prediction board" },
+  { label: "Fed & Economics", url: "https://kalshi.com/browse?q=fed", color: "text-green-400", desc: "Fed rate & macro events" },
+  { label: "Politics & Policy", url: "https://kalshi.com/category/politics", color: "text-red-400", desc: "Policy decisions affecting crypto" },
+  { label: "Finance Markets", url: "https://kalshi.com/browse?q=finance", color: "text-cyan-300", desc: "Stocks, indices & financial events" },
 ];
 
 const HOW_IT_WORKS = [
@@ -49,11 +49,11 @@ export default function PredictionMarkets() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <a href="https://trading.kalshi.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://kalshi.com/browse" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-xl font-cinzel text-sm tracking-wider hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                 <ExternalLink className="w-4 h-4" /> Open Kalshi Markets
               </a>
-              <a href="https://kalshi.com/learn" target="_blank" rel="noopener noreferrer"
+              <a href="https://kalshi.com" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-3 bg-card border border-border text-muted-foreground rounded-xl font-cinzel text-sm tracking-wider hover:border-primary/40 hover:text-primary transition-colors">
                 Learn How It Works
               </a>

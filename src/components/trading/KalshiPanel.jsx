@@ -91,21 +91,17 @@ export default function KalshiPanel({ defaultOpen = false }) {
             <div className="border-t border-border/30 p-4 space-y-4">
               {/* Kalshi direct links */}
               <div className="flex flex-wrap gap-2">
-                <a href={`${KALSHI_MARKETS_BASE}?category=crypto`} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-                  <ExternalLink className="w-3 h-3" /> Crypto Markets
-                </a>
-                <a href="https://kalshi.com/markets/KXBTCD" target="_blank" rel="noopener noreferrer"
+                <a href="https://kalshi.com/browse?q=bitcoin" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
                   <ExternalLink className="w-3 h-3" /> Bitcoin
                 </a>
-                <a href="https://kalshi.com/markets/KXETH" target="_blank" rel="noopener noreferrer"
+                <a href="https://kalshi.com/browse?q=ethereum" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
                   <ExternalLink className="w-3 h-3" /> Ethereum
                 </a>
-                <a href="https://kalshi.com/markets/KXSOL" target="_blank" rel="noopener noreferrer"
+                <a href="https://kalshi.com/browse?q=crypto" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
-                  <ExternalLink className="w-3 h-3" /> Solana
+                  <ExternalLink className="w-3 h-3" /> All Crypto
                 </a>
               </div>
 
