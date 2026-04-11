@@ -14,12 +14,12 @@ const KALSHI_CATEGORIES = [
 ];
 
 const POLYMARKET_CATEGORIES = [
-  { label: "Bitcoin Markets", url: "https://polymarket.com/markets/crypto/bitcoin", color: "text-orange-400", desc: "BTC price & ETF prediction markets" },
-  { label: "Ethereum Markets", url: "https://polymarket.com/markets/crypto/ethereum", color: "text-blue-300", desc: "ETH price & upgrade markets" },
-  { label: "All Crypto Markets", url: "https://polymarket.com/markets/crypto", color: "text-primary", desc: "Full crypto prediction board" },
-  { label: "Politics", url: "https://polymarket.com/markets/politics", color: "text-red-400", desc: "Political outcomes & elections" },
-  { label: "Economics", url: "https://polymarket.com/markets/economics", color: "text-green-400", desc: "Macro & economic events" },
-  { label: "Science & Tech", url: "https://polymarket.com/markets/science", color: "text-cyan-300", desc: "Tech, AI & science outcomes" },
+  { label: "Bitcoin Markets", url: "https://polymarket.com/predictions/bitcoin", color: "text-orange-400", desc: "BTC price & ETF prediction markets" },
+  { label: "Ethereum Markets", url: "https://polymarket.com/predictions/ethereum", color: "text-blue-300", desc: "ETH price & upgrade markets" },
+  { label: "All Crypto Markets", url: "https://polymarket.com/predictions/crypto", color: "text-primary", desc: "Full crypto prediction board" },
+  { label: "Politics", url: "https://polymarket.com/politics", color: "text-red-400", desc: "Political outcomes & elections" },
+  { label: "Economics", url: "https://polymarket.com/predictions/economics", color: "text-green-400", desc: "Macro & economic events" },
+  { label: "Science & Tech", url: "https://polymarket.com/predictions/technology", color: "text-cyan-300", desc: "Tech, AI & science outcomes" },
 ];
 
 const HOW_IT_WORKS = [

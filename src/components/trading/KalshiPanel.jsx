@@ -135,15 +135,15 @@ export default function KalshiPanel({ defaultOpen = false }) {
               {/* Polymarket direct links */}
               {activeMarket === "polymarket" && (
               <div className="flex flex-wrap gap-2">
-                <a href="https://polymarket.com/markets/crypto/bitcoin" target="_blank" rel="noopener noreferrer"
+                <a href="https://polymarket.com/predictions/bitcoin" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
                   <ExternalLink className="w-3 h-3" /> Bitcoin
                 </a>
-                <a href="https://polymarket.com/markets/crypto/ethereum" target="_blank" rel="noopener noreferrer"
+                <a href="https://polymarket.com/predictions/ethereum" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
                   <ExternalLink className="w-3 h-3" /> Ethereum
                 </a>
-                <a href="https://polymarket.com/markets/crypto" target="_blank" rel="noopener noreferrer"
+                <a href="https://polymarket.com/predictions/crypto" target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
                   <ExternalLink className="w-3 h-3" /> All Crypto
                 </a>
