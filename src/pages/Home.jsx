@@ -60,19 +60,19 @@ export default function Home() {
 
       {/* Pillars Section */}
       <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16">
-          
-          <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">
-            Our Foundation
-          </p>
-          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-foreground">
-            One Nation Under God
-          </h2>
-        </motion.div>
+        
+
+
+
+
+
+
+
+
+
+
+
+        
 
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((pillar, i) => null
