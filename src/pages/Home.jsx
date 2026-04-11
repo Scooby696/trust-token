@@ -205,6 +205,71 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Prediction Markets Section */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-border/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="text-center mb-8">
+            <p className="font-inter text-xs tracking-[0.3em] text-primary uppercase mb-3">Live Markets</p>
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-foreground">Prediction Markets</h2>
+            <p className="font-inter text-sm text-muted-foreground mt-3 max-w-xl mx-auto">
+              Trade on real-world outcomes. Use crowd probability data as a powerful signal for your crypto strategy.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {/* Kalshi */}
+            <div className="bg-card border border-primary/20 rounded-2xl p-6 hover:border-primary/40 transition-all">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-cinzel text-lg font-bold text-primary">🇺🇸 Kalshi</span>
+                <span className="px-2 py-0.5 bg-green-900/20 border border-green-700/30 text-green-400 text-[10px] font-inter rounded-full">CFTC-Regulated</span>
+              </div>
+              <p className="font-inter text-xs text-muted-foreground mb-4 leading-relaxed">America's first federally regulated prediction market. Trade binary contracts on crypto, politics, economics & more.</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {[["Bitcoin", "https://kalshi.com/markets/kxbtcd"], ["Ethereum", "https://kalshi.com/markets/kxeth"], ["All Crypto", "https://kalshi.com/browse?q=crypto"]].map(([label, url]) => (
+                  <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                    className="px-2.5 py-1 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors">
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <a href="https://kalshi.com/browse" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+                Open Kalshi →
+              </a>
+            </div>
+            {/* Polymarket */}
+            <div className="bg-card border border-blue-700/30 rounded-2xl p-6 hover:border-blue-500/50 transition-all">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-cinzel text-lg font-bold text-blue-300">🌐 Polymarket</span>
+                <span className="px-2 py-0.5 bg-blue-900/20 border border-blue-700/30 text-blue-300 text-[10px] font-inter rounded-full">Global · Crypto-Powered</span>
+              </div>
+              <p className="font-inter text-xs text-muted-foreground mb-4 leading-relaxed">The world's largest prediction market. Trade on crypto, politics, sports, science & global events with on-chain settlement.</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {[["Bitcoin", "https://polymarket.com/predictions/bitcoin"], ["Ethereum", "https://polymarket.com/predictions/ethereum"], ["All Crypto", "https://polymarket.com/predictions/crypto"]].map(([label, url]) => (
+                  <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                    className="px-2.5 py-1 bg-background border border-border rounded-lg text-xs font-inter text-muted-foreground hover:text-blue-300 hover:border-blue-700/40 transition-colors">
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <a href="https://polymarket.com" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                Open Polymarket →
+              </a>
+            </div>
+          </div>
+          <div className="text-center mt-5">
+            <Link to="/prediction-markets" className="inline-flex items-center gap-2 font-inter text-sm text-primary hover:text-primary/80 tracking-wider transition-colors">
+              View AI Prediction Market Analyzer <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
       {/* MADEINUSA Marketplace Hero Ad */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-border/30">
         <motion.div
