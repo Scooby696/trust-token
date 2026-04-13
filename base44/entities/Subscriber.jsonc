@@ -1,0 +1,22 @@
+{
+  "name": "Subscriber",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Subscriber email address"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "unsubscribed"
+      ],
+      "default": "active",
+      "description": "Subscription status"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

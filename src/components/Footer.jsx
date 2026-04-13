@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import TokenPriceBar from "./TokenPriceBar";
+import { base44 } from "@/api/base44Client";
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -20,6 +21,63 @@ const FacebookIcon = () => (
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
   </svg>
 );
+
+function NewsletterSignup() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState(null); // null | "loading" | "success" | "error" | "duplicate"
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus("loading");
+    try {
+      const existing = await base44.entities.Subscriber.filter({ email: email.trim() });
+      if (existing.length > 0) {
+        setStatus("duplicate");
+        return;
+      }
+      await base44.entities.Subscriber.create({ email: email.trim(), status: "active" });
+      setStatus("success");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <div className="w-full border-t border-border/40 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <p className="font-cinzel text-sm font-bold text-foreground tracking-wider">Stay Updated</p>
+          <p className="font-inter text-xs text-muted-foreground mt-0.5">Get the latest news from TRUST TOKEN & MADE IN USA DIGITAL.</p>
+        </div>
+        {status === "success" ? (
+          <div className="flex items-center gap-2 px-4 py-2.5 bg-green-900/20 border border-green-700/30 rounded-lg">
+            <span className="text-green-400 text-sm">✓</span>
+            <p className="font-inter text-xs text-green-300">You're subscribed!</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex gap-2 w-full sm:w-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="flex-1 sm:w-64 bg-background border border-border rounded-lg px-4 py-2 text-sm font-inter text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+            <button type="submit" disabled={status === "loading"}
+              className="px-5 py-2 bg-primary text-primary-foreground rounded-lg font-cinzel text-xs tracking-wider hover:bg-primary/90 transition-colors disabled:opacity-60 shrink-0">
+              {status === "loading" ? "..." : "Subscribe"}
+            </button>
+          </form>
+        )}
+        {status === "duplicate" && <p className="font-inter text-xs text-yellow-400 sm:absolute sm:mt-16">Already subscribed!</p>}
+        {status === "error" && <p className="font-inter text-xs text-red-400">Something went wrong. Try again.</p>}
+      </div>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -74,6 +132,7 @@ export default function Footer() {
         </a>
       </div>
 
+      <NewsletterSignup />
       <TokenPriceBar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
