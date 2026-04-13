@@ -1,0 +1,69 @@
+{
+  "name": "GlobalPartner",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Partner company name"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of operation"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Exchange",
+        "DeFi",
+        "Blockchain Infrastructure",
+        "Payments",
+        "Custody & Banking",
+        "Developer Tools",
+        "Analytics & Compliance",
+        "NFT & Marketplace",
+        "Media & Data",
+        "Identity & Security",
+        "Other"
+      ],
+      "description": "Service category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the partner"
+    },
+    "website": {
+      "type": "string",
+      "description": "Partner website URL"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Logo image URL"
+    },
+    "highlight": {
+      "type": "string",
+      "description": "Key highlight or tagline"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "pending",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "Vetting status"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Featured partner"
+    }
+  },
+  "required": [
+    "name",
+    "country",
+    "category",
+    "description",
+    "website"
+  ]
+}

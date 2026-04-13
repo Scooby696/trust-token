@@ -6,6 +6,7 @@ import HeroSection from "../components/HeroSection";
 import LatestUpdates from "../components/LatestUpdates";
 import USAFactsFigures from "../components/USAFactsFigures";
 import WalletConnectHero from "../components/portfolio/WalletConnectHero";
+import GlobalPartnersSection from "../components/GlobalPartnersSection";
 
 const BANKING_QUOTES = [
   { quote: "Banking establishments are more dangerous than standing armies.", author: "Thomas Jefferson", title: "3rd President" },
@@ -170,6 +171,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <GlobalPartnersSection compact />
 
       <WalletConnectHero />
 

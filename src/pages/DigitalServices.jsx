@@ -4,6 +4,7 @@ import { Search, Star, Filter, X, Zap, Shield, TrendingUp, Globe, Sparkles, Exte
 import { SPOTLIGHT_10, ALL_100_DIGITAL, DIGITAL_CATEGORIES } from "../lib/digitalServicesData";
 import ProviderCard from "../components/digital/ProviderCard";
 import AIProviderSearch from "../components/digital/AIProviderSearch";
+import GlobalPartnersSection from "../components/GlobalPartnersSection";
 
 const CATEGORY_COLORS = {
   "Exchange": "bg-blue-900/40 text-blue-300",
@@ -280,6 +281,8 @@ export default function DigitalServices() {
           </section>
         </>
       )}
+
+      <GlobalPartnersSection />
 
       {showAI && <AIProviderSearch onClose={() => setShowAI(false)} />}
     </div>
