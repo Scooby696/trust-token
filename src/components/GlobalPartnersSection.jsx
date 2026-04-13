@@ -47,7 +47,7 @@ export default function GlobalPartnersSection({ compact = false }) {
             </p>
           </div>
           {compact && (
-            <Link to="/digital" className="inline-flex items-center gap-2 font-inter text-sm text-primary hover:text-primary/80 tracking-wider transition-colors shrink-0">
+            <Link to="/global-partners" className="inline-flex items-center gap-2 font-inter text-sm text-primary hover:text-primary/80 tracking-wider transition-colors shrink-0">
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           )}
@@ -136,7 +136,7 @@ export default function GlobalPartnersSection({ compact = false }) {
 
         {!loading && partners.length > 0 && compact && (
           <div className="mt-6 text-center">
-            <Link to="/digital" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-5 py-2.5 border border-primary/30 text-primary rounded-lg hover:bg-primary/10 transition-colors">
+            <Link to="/global-partners" className="inline-flex items-center gap-2 font-cinzel tracking-wider text-xs px-5 py-2.5 border border-primary/30 text-primary rounded-lg hover:bg-primary/10 transition-colors">
               View All Global Partners <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

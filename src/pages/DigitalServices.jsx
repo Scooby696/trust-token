@@ -282,7 +282,21 @@ export default function DigitalServices() {
         </>
       )}
 
-      <GlobalPartnersSection />
+      {/* Link to Global Partners page */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/30">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-card border border-primary/20 rounded-2xl p-6">
+          <div className="flex items-center gap-3">
+            <Globe className="w-8 h-8 text-primary shrink-0" />
+            <div>
+              <p className="font-cinzel font-bold text-foreground text-lg">Trusted Digital Partners Worldwide</p>
+              <p className="font-inter text-sm text-muted-foreground">Global partners vetted to the same standards as this USA directory — kept separate.</p>
+            </div>
+          </div>
+          <a href="/global-partners" className="shrink-0 inline-flex items-center gap-2 font-cinzel tracking-wider text-sm px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+            View Global Partners →
+          </a>
+        </div>
+      </section>
 
       {showAI && <AIProviderSearch onClose={() => setShowAI(false)} />}
     </div>

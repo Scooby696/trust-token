@@ -43,6 +43,7 @@ const MORE_LINKS = [
   { label: "Portfolio", to: "/portfolio" },
   { label: "Trading Terminal", to: "/terminal" },
   { label: "Prediction Markets", to: "/prediction-markets" },
+  { label: "Global Partners", to: "/global-partners" },
 ];
 
 const ALL_MOBILE_LINKS = [
