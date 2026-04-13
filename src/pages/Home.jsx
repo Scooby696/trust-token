@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import LatestUpdates from "../components/LatestUpdates";
+import LiveCryptoNews from "../components/LiveCryptoNews";
 import USAFactsFigures from "../components/USAFactsFigures";
 import WalletConnectHero from "../components/portfolio/WalletConnectHero";
 import GlobalPartnersSection from "../components/GlobalPartnersSection";
@@ -175,6 +176,8 @@ export default function Home() {
       <GlobalPartnersSection compact />
 
       <WalletConnectHero />
+
+      <LiveCryptoNews />
 
       <LatestUpdates />
 
