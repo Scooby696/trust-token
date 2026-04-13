@@ -104,7 +104,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://x.com/trust_tokenusa"
+              href="https://x.com/TrustUsa70742"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"

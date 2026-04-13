@@ -164,7 +164,7 @@ export default function Navbar() {
 
           {/* Social Icons - Desktop */}
           <div className="hidden lg:flex items-center gap-3 pl-3 border-l border-border/50 shrink-0">
-            <a href="https://x.com/trust_tokenusa" target="_blank" rel="noopener noreferrer"
+            <a href="https://x.com/TrustUsa70742" target="_blank" rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors" aria-label="X (Twitter)">
               <XIcon />
             </a>
