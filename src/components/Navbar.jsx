@@ -44,6 +44,7 @@ const MORE_LINKS = [
   { label: "Trading Terminal", to: "/terminal" },
   { label: "Prediction Markets", to: "/prediction-markets" },
   { label: "Global Partners", to: "/global-partners" },
+  { label: "Whitepaper", to: "/whitepaper" },
 ];
 
 const ALL_MOBILE_LINKS = [

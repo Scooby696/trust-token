@@ -26,6 +26,7 @@ import Portfolio from './pages/Portfolio';
 import TradingTerminal from './pages/TradingTerminal';
 import PredictionMarkets from './pages/PredictionMarkets';
 import GlobalPartners from './pages/GlobalPartners';
+import Whitepaper from './pages/Whitepaper';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -69,6 +70,7 @@ const AuthenticatedApp = () => {
         <Route path="/terminal" element={<TradingTerminal />} />
         <Route path="/prediction-markets" element={<PredictionMarkets />} />
         <Route path="/global-partners" element={<GlobalPartners />} />
+        <Route path="/whitepaper" element={<Whitepaper />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
